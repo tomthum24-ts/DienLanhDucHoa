@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<Model.EF.DuAn>
+@using Model.Enum;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     int soThuTu = 0;
     var link = "/du-an";
+    var linkDuAn = LinkConstants.DichVu;
+    var linkLoaiDuAn = LinkConstants.LoaiDichVu;
 }
 @section OpenGraph {
     <title>@ViewBag.Title</title>
@@ -10,20 +13,20 @@
     <meta property="og:image" content="~/Public/Layout/Images/logo.png">
     <meta property="og:image:secure_url" content="~/Public/Layout/Images/logo.png">
     <meta property="og:description" content="@ViewBag.Description">
-    <meta property="og:url" content="./du-an">
+    <meta property="og:url" content="./@linkDuAn">
     <meta property="og:site_name" content="Tổng hợp các dự án do Hoàng Gia Group Phân phối">
     <meta name="description" content="@ViewBag.Description">
 }
 <div class="header-show d-flex justify-content-center p-0">
     <div class="project--header justify-content-start flex-column">
         <div class="project--nav d-flex justify-content-start flex-wrap align-items-center px-md-5">
-            <a href="/du-an"
+            <a href="/@linkDuAn"
                class="project--nav__btn btn--hover btn btn-xl 1 text-white border rounded-0 shadow-sm active">TẤT CẢ</a>
             @if (ViewBag.LoaiDuAn != null || ViewBag.LoaiDuAn.Count > 0)
             {
                 foreach (var item in ViewBag.LoaiDuAn)
                 {
-                    <a href="loai-du-an/@item.MetaTitle-@item.Id"
+                    <a href="@linkLoaiDuAn/@item.MetaTitle-@item.Id"
                        class="project--nav__btn btn--hover btn btn-xl mr-1 text-white font-weight-bold border rounded-0 shadow-sm">@item.TenLoaiDuAn</a>
 
                 }
@@ -59,143 +62,143 @@
         </div>
     }
     <!--start-->
-<div class="container project">
-    <div class="project--header d-flex justify-content-start flex-column">
-        <h2 class="project--header__title mt-2 display-4 text-warning px-md-5">
-            HOÀNG GIA LAND
-        </h2>
-        <div class="project--nav d-flex justify-content-start flex-wrap align-items-center px-md-5">
-            <a href="/du-an"
-               class="project--nav__btn btn--hover btn btn-xl mr-1 text-white border rounded-0 shadow-sm active">TẤT CẢ</a>
-            @if (ViewBag.LoaiDuAn != null || ViewBag.LoaiDuAn.Count > 0)
-            {
-                foreach (var item in ViewBag.LoaiDuAn)
+    <div class="container project">
+        <div class="project--header d-flex justify-content-start flex-column">
+            <h2 class="project--header__title mt-2 display-4 text-warning px-md-5">
+                HOÀNG GIA LAND
+            </h2>
+            <div class="project--nav d-flex justify-content-start flex-wrap align-items-center px-md-5">
+                <a href="/du-an"
+                   class="project--nav__btn btn--hover btn btn-xl mr-1 text-white border rounded-0 shadow-sm active">TẤT CẢ</a>
+                @if (ViewBag.LoaiDuAn != null || ViewBag.LoaiDuAn.Count > 0)
                 {
-                    <a href="loai-du-an/@item.MetaTitle-@item.Id"
-                       class="project--nav__btn btn--hover btn btn-xl mr-1 text-white font-weight-bold border rounded-0 shadow-sm">@item.TenLoaiDuAn</a>
+                    foreach (var item in ViewBag.LoaiDuAn)
+                    {
+                        <a href="@linkLoaiDuAn/@item.MetaTitle-@item.Id"
+                           class="project--nav__btn btn--hover btn btn-xl mr-1 text-white font-weight-bold border rounded-0 shadow-sm">@item.TenLoaiDuAn</a>
+                    }
                 }
+            </div>
+        </div>
+        <div class="header-setTop"></div>
+        <div class="project--list">
+
+            @foreach (var item in Model)
+            {
+                if (soThuTu % 2 == 0)
+                {
+                    <div class="row project--item flex-md-row-reverse justify-content-center align-items-center"
+                         data-aos="fade-left">
+                        <div class="col-xl-6 col-md-6 col-sm-12 project--item__img p-0">
+                            <div data-aos="zoom-in"
+                                 class="project--item__image"
+                                 data-aos="zoom-in">
+                                <a href="@linkDuAn/@item.MetaTitle-@item.Id">
+                                    <img class="bg-secondary image"
+                                         src="@item.Image"
+                                         alt="@item.Title" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-md-6 col-sm-12 project--item__sub d-flex align-items-start flex-column justify-content-center pr-md-5">
+                            <h3 class="project--item__title display-4 font-weight-bold" style="font-size:2em">
+                                @item.TenDuAn
+                            </h3>
+                            <p class="project--item__desc" style="font-size:1em">
+                                @item.MoTa
+                            </p>
+                            <a href="@linkDuAn/@item.MetaTitle-@item.Id" class="project--item__btn btn btn--hover">XEM DỰ ÁN</a>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row project--item justify-content-center align-items-center"
+                         data-aos="fade-left">
+                        <div class="col-xl-6 col-md-6 col-sm-12 project--item__img p-0">
+                            <div data-aos="zoom-in"
+                                 class="project--item__image"
+                                 data-aos="zoom-in">
+                                <a href="@linkDuAn/@item.MetaTitle-@item.Id">
+                                    <img class="bg-secondary image"
+                                         src="@item.Image"
+                                         alt="@item.Title" />
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-md-6 col-sm-12 project--item__sub d-flex align-items-start flex-column justify-content-center pr-md-5">
+                            <h3 class="project--item__title display-4 font-weight-bold" style="font-size:2em">
+                                @item.TenDuAn
+                            </h3>
+                            <p class="project--item__desc" style="font-size:1em">
+                                @item.MoTa
+                            </p>
+                            <a href="@linkDuAn/@item.MetaTitle-@item.Id" class="project--item__btn btn btn--hover">XEM DỰ ÁN</a>
+                        </div>
+                    </div>
+                }
+
+                soThuTu++;
             }
         </div>
-    </div>
-    <div class="header-setTop"></div>
-    <div class="project--list">
-
-        @foreach (var item in Model)
+        @if (ViewBag.Total > 0)
         {
-            if (soThuTu % 2 == 0)
-            {
-                <div class="row project--item flex-md-row-reverse justify-content-center align-items-center"
-                     data-aos="fade-left">
-                    <div class="col-xl-6 col-md-6 col-sm-12 project--item__img p-0">
-                        <div data-aos="zoom-in"
-                             class="project--item__image"
-                             data-aos="zoom-in">
-                            <a href="du-an/@item.MetaTitle-@item.Id">
-                                <img class="bg-secondary image"
-                                     src="@item.Image"
-                                     alt="@item.Title" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-md-6 col-sm-12 project--item__sub d-flex align-items-start flex-column justify-content-center pr-md-5">
-                        <h3 class="project--item__title display-4 font-weight-bold" style="font-size:2em">
-                            @item.TenDuAn
-                        </h3>
-                        <p class="project--item__desc" style="font-size:1em">
-                            @item.MoTa
-                        </p>
-                        <a href="du-an/@item.MetaTitle-@item.Id" class="project--item__btn btn btn--hover">XEM DỰ ÁN</a>
-                    </div>
-                </div>
-            }
-            else
-            {
-                <div class="row project--item justify-content-center align-items-center"
-                     data-aos="fade-left">
-                    <div class="col-xl-6 col-md-6 col-sm-12 project--item__img p-0">
-                        <div data-aos="zoom-in"
-                             class="project--item__image"
-                             data-aos="zoom-in">
-                            <a href="du-an/@item.MetaTitle-@item.Id">
-                                <img class="bg-secondary image"
-                                     src="@item.Image"
-                                     alt="@item.Title" />
-                            </a>
+            var pageDisplay = (int)ViewBag.MaxPage;
+            int totalPage = (int)ViewBag.TotalPage;
+            int currentPage = ((int)ViewBag.Page);
 
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-md-6 col-sm-12 project--item__sub d-flex align-items-start flex-column justify-content-center pr-md-5">
-                        <h3 class="project--item__title display-4 font-weight-bold" style="font-size:2em">
-                            @item.TenDuAn
-                        </h3>
-                        <p class="project--item__desc" style="font-size:1em">
-                            @item.MoTa
-                        </p>
-                        <a href="du-an/@item.MetaTitle-@item.Id" class="project--item__btn btn btn--hover">XEM DỰ ÁN</a>
-                    </div>
-                </div>
-            }
+            // Create numeric links
+            var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+            var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
 
-            soThuTu++;
+
+            <nav style="verticle-align: middle; ">
+                <ul class="pagination">
+                    @if (currentPage > ViewBag.First)
+                    {
+                        <li style="margin-right:5px; margin-top:5px"><a href="/@linkDuAn?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i>Trang đầu</a></li>
+                        @*<li>
+                                <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev">Trang trước<i class="fa fa-angle-left"></i></a>
+                            </li>*@
+
+                    }
+                    @for (int i = startPageIndex; i <= endPageIndex; i++)
+                    {
+                        <div class="btn-group" role="group" aria-label="First group">
+                            @if (currentPage == i)
+                            {
+
+                                <a href="/@linkDuAn?page=@i" class="active" title="Trang @i"><button style="margin-right: 5px; color: black" type="button" class="btn btn-secondary mb-4">@i</button> </a>
+
+
+
+                            }
+                            else
+                            {
+                                <a href="/@linkDuAn?page=@i" class="active" title="Trang @i"><button style="margin-right: 5px; color: white" type="button" class="btn btn-secondary mb-4">@i</button> </a>
+                            }
+                        </div>
+                    }
+                    @if (currentPage < totalPage)
+                    {
+                        @*<li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau">Trang sau<i class="fa fa-angle-right"></i></a></li>*@
+                        <li style="margin-right:5px;margin-top:5px"> <a href="/@linkDuAn?page=@ViewBag.Last" class="last" title="Trang cuối">Trang cuối<i class="fa fa-angle-double-right"></i></a></li>
+                    }
+
+                </ul>
+            </nav>
+
+        }
+        else
+        {
+            <div class="row project--item justify-content-center align-items-center"
+                 data-aos="fade-left">
+                <img class="bg-secondary image" style="max-height:400px; max-width:400px"
+                     src="~/Public/Layout/Images/Nodata.jpg"
+                     alt="" />
+            </div>
         }
     </div>
-    @if (ViewBag.Total > 0)
-    {
-        var pageDisplay = (int)ViewBag.MaxPage;
-        int totalPage = (int)ViewBag.TotalPage;
-        int currentPage = ((int)ViewBag.Page);
-
-        // Create numeric links
-        var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
-        var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
-
-
-        <nav style="verticle-align: middle; ">
-            <ul class="pagination">
-                @if (currentPage > ViewBag.First)
-                {
-                    <li style="margin-right:5px; margin-top:5px"><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i>Trang đầu</a></li>
-                    @*<li>
-                            <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev">Trang trước<i class="fa fa-angle-left"></i></a>
-                        </li>*@
-
-                }
-                @for (int i = startPageIndex; i <= endPageIndex; i++)
-                {
-                    <div class="btn-group" role="group" aria-label="First group">
-                        @if (currentPage == i)
-                        {
-
-                            <a href="@link?page=@i" class="active" title="Trang @i"><button style="margin-right: 5px; color: black" type="button" class="btn btn-secondary mb-4">@i</button> </a>
-
-
-
-                        }
-                        else
-                        {
-                            <a href="@link?page=@i" class="active" title="Trang @i"><button style="margin-right: 5px; color: white" type="button" class="btn btn-secondary mb-4">@i</button> </a>
-                        }
-                    </div>
-                }
-                @if (currentPage < totalPage)
-                {
-                    @*<li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau">Trang sau<i class="fa fa-angle-right"></i></a></li>*@
-                    <li style="margin-right:5px;margin-top:5px"> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối">Trang cuối<i class="fa fa-angle-double-right"></i></a></li>
-                }
-
-            </ul>
-        </nav>
-
-    }
-    else
-    {
-        <div class="row project--item justify-content-center align-items-center"
-             data-aos="fade-left">
-            <img class="bg-secondary image" style="max-height:400px; max-width:400px"
-                 src="~/Public/Layout/Images/Nodata.jpg"
-                 alt="" />
-        </div>
-    }
-</div>
     @{Html.RenderAction("Footer", "Home"); }
 </div>

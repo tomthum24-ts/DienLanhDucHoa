@@ -3,8 +3,8 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     int soThuTu = 0;
-    var link = LinkConstants.DichVu;
-    var linkLoai = LinkConstants.LoaiDichVu;
+    var linkDuAn = LinkConstants.DichVu;
+    var linkLoaiDuAn = LinkConstants.LoaiDichVu;
 }
 @section OpenGraph {
     <title>@ViewBag.Title</title>
@@ -12,7 +12,7 @@
     <meta property="og:image" content="~/Public/Layout/Images/logo.png">
     <meta property="og:image:secure_url" content="~/Public/Layout/Images/logo.png">
     <meta property="og:description" content="@ViewBag.Description">
-    <meta property="og:url" content="./du-an">
+    <meta property="og:url" content="./@linkDuAn">
     <meta property="og:site_name" content="Tổng hợp các dự án do Hoàng Gia Group Phân phối">
     <meta name="description" content="@ViewBag.Description">
 
@@ -20,7 +20,7 @@
 <div class="header-show d-flex justify-content-center p-0">
     <div class="project--header justify-content-start flex-column">
         <div class="project--nav d-flex justify-content-start flex-wrap align-items-center px-md-5">
-            <a href="/@link"
+            <a href="/@linkDuAn"
                class="project--nav__btn btn--hover btn btn-xl 1 text-white border rounded-0 shadow-sm">TẤT CẢ</a>
             @if (ViewBag.LoaiDuAn != null || ViewBag.LoaiDuAn.Count > 0)
             {
@@ -28,12 +28,12 @@
                 {
                     if (item.Id == ViewBag.Id)
                     {
-                        <a href="/@linkLoai/@item.MetaTitle-@item.Id"
+                        <a href="/@linkLoaiDuAn/@item.MetaTitle-@item.Id"
                            class="project--nav__btn btn--hover btn btn-xl mr-1 text-white font-weight-bold border rounded-0 shadow-sm active">@item.TenLoaiDuAn</a>
                     }
                     else
                     {
-                        <a href="/@linkLoai/@item.MetaTitle-@item.Id"
+                        <a href="/@linkLoaiDuAn/@item.MetaTitle-@item.Id"
                            class="project--nav__btn btn--hover btn btn-xl mr-1 text-white font-weight-bold border rounded-0 shadow-sm">@item.TenLoaiDuAn</a>
                     }
 
@@ -77,7 +77,7 @@
                 HOÀNG GIA LAND
             </h2>
             <div class="project--nav d-flex justify-content-start flex-wrap align-items-center px-md-5">
-                <a href="/du-an"
+                <a href="/@linkDuAn"
                    class="project--nav__btn btn--hover btn btn-xl mr-1 text-white border rounded-0 shadow-sm ">TẤT CẢ</a>
                 @if (ViewBag.LoaiDuAn != null || ViewBag.LoaiDuAn.Count > 0)
                 {
@@ -85,12 +85,12 @@
                     {
                         if (item.Id == ViewBag.Id)
                         {
-                            <a href="/loai-du-an/@item.MetaTitle-@item.Id"
+                            <a href="/@linkLoaiDuAn/@item.MetaTitle-@item.Id"
                                class="project--nav__btn btn--hover btn btn-xl mr-1 text-white font-weight-bold border rounded-0 shadow-sm active">@item.TenLoaiDuAn</a>
                         }
                         else
                         {
-                            <a href="/loai-du-an/@item.MetaTitle-@item.Id"
+                            <a href="/@linkLoaiDuAn/@item.MetaTitle-@item.Id"
                                class="project--nav__btn btn--hover btn btn-xl mr-1 text-white font-weight-bold border rounded-0 shadow-sm">@item.TenLoaiDuAn</a>
                         }
 
@@ -111,7 +111,7 @@
                             <div data-aos="zoom-in"
                                  class="project--item__image"
                                  data-aos="zoom-in">
-                                <a href="/du-an/@item.MetaTitle-@item.Id">
+                                <a href="/@linkDuAn/@item.MetaTitle-@item.Id">
                                     <img class="bg-secondary image"
                                          src="@item.Image"
                                          alt="@item.Title" />
@@ -125,7 +125,7 @@
                             <p class="project--item__desc" style="font-size:1em">
                                 @item.MoTa
                             </p>
-                            <a href="/du-an/@item.MetaTitle-@item.Id" class="project--item__btn btn btn--hover">XEM DỰ ÁN</a>
+                            <a href="/@linkDuAn/@item.MetaTitle-@item.Id" class="project--item__btn btn btn--hover">XEM DỰ ÁN</a>
                         </div>
                     </div>
                 }
@@ -137,7 +137,7 @@
                             <div data-aos="zoom-in"
                                  class="project--item__image"
                                  data-aos="zoom-in">
-                                <a href="/du-an/@item.MetaTitle-@item.Id">
+                                <a href="/@linkDuAn/@item.MetaTitle-@item.Id">
                                     <img class="bg-secondary image"
                                          src="@item.Image"
                                          alt="@item.Title" />
@@ -152,7 +152,7 @@
                             <p class="project--item__desc" style="font-size:1em">
                                 @item.MoTa
                             </p>
-                            <a href="/du-an/@item.MetaTitle-@item.Id" class="project--item__btn btn btn--hover">XEM DỰ ÁN</a>
+                            <a href="/@linkDuAn/@item.MetaTitle-@item.Id" class="project--item__btn btn btn--hover">XEM DỰ ÁN</a>
                         </div>
                     </div>
                 }
@@ -175,7 +175,7 @@
                 <ul class="pagination">
                     @if (currentPage > ViewBag.First)
                     {
-                        <li style="margin-right:5px; margin-top:5px"><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i>Trang đầu</a></li>
+                        <li style="margin-right:5px; margin-top:5px"><a href="/@linkDuAn?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i>Trang đầu</a></li>
                         @*<li>
                                 <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev">Trang trước<i class="fa fa-angle-left"></i></a>
                             </li>*@
@@ -187,21 +187,21 @@
                             @if (currentPage == i)
                             {
 
-                                <a href="@link?page=@i" class="active" title="Trang @i"><button style="margin-right: 5px; color: black" type="button" class="btn btn-secondary mb-4">@i</button> </a>
+                                <a href="/@linkDuAn?page=@i" class="active" title="Trang @i"><button style="margin-right: 5px; color: black" type="button" class="btn btn-secondary mb-4">@i</button> </a>
 
 
 
                             }
                             else
                             {
-                                <a href="@link?page=@i" class="active" title="Trang @i"><button style="margin-right: 5px; color: white" type="button" class="btn btn-secondary mb-4">@i</button> </a>
+                                <a href="/@linkDuAn?page=@i" class="active" title="Trang @i"><button style="margin-right: 5px; color: white" type="button" class="btn btn-secondary mb-4">@i</button> </a>
                             }
                         </div>
                     }
                     @if (currentPage < totalPage)
                     {
                         @*<li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau">Trang sau<i class="fa fa-angle-right"></i></a></li>*@
-                        <li style="margin-right:5px;margin-top:5px"> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối">Trang cuối<i class="fa fa-angle-double-right"></i></a></li>
+                        <li style="margin-right:5px;margin-top:5px"> <a href="/@linkDuAn?page=@ViewBag.Last" class="last" title="Trang cuối">Trang cuối<i class="fa fa-angle-double-right"></i></a></li>
                     }
 
                 </ul>

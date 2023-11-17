@@ -56,5 +56,6 @@ namespace Model.Enum
         public const string DichVu = "dich-vu";
         public const string LoaiTinTuc = "loai-bai-viet";
         public const string TinTuc = "bai-viet";
+        public const string TimKiemDichVu = "tim-kiem-dich-vu";
     }
 }

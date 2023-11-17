@@ -1,10 +1,13 @@
 ﻿@model IEnumerable<Model.EF.Contents>
+@using Model.Enum;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var listActive = Model.Select(x => x.ID).FirstOrDefault();
     var listNewsMain = Model.Where(x => x.ID == listActive).ToList();
     var listNews = Model.Where(x => x.ID != listActive).ToList();
     var category = (Model.EF.Category)ViewBag.IdCategory;
+    var linkTinTuc = LinkConstants.TinTuc;
+    var linkLoaiTinTuc = LinkConstants.LoaiTinTuc;
 
 }
 @section OpenGraph {
@@ -30,12 +33,12 @@
                 {
                     if (item.ID == ViewBag.Id)
                     {
-                        <a href="/loai-bai-viet/@item.MetaTitle-@item.ID"
+                        <a href="/@linkLoaiTinTuc/@item.MetaTitle-@item.ID"
                            class="project--nav__btn btn btn--hover btn-xl mr-2 text-white font-weight-bold border rounded-0 shadow-sm active">@item.Name</a>
                     }
                     else
                     {
-                        <a href="/loai-bai-viet/@item.MetaTitle-@item.ID"
+                        <a href="/@linkLoaiTinTuc/@item.MetaTitle-@item.ID"
                            class="project--nav__btn btn btn--hover btn-xl mr-2 text-white font-weight-bold border rounded-0 shadow-sm">@item.Name</a>
                     }
 
@@ -89,12 +92,12 @@
                     {
                         if (item.ID == ViewBag.Id)
                         {
-                            <a href="/loai-bai-viet/@item.MetaTitle-@item.ID"
+                            <a href="/@linkLoaiTinTuc/@item.MetaTitle-@item.ID"
                                class="project--nav__homeCity btn btn--hover btn-xl mr-1 text-white font-weight-bold border rounded-0 shadow-sm active">@item.Name</a>
                         }
                         else
                         {
-                            <a href="/loai-bai-viet/@item.MetaTitle-@item.ID"
+                            <a href="/@linkLoaiTinTuc/@item.MetaTitle-@item.ID"
                                class="project--nav__homeCity btn btn--hover btn-xl mr-1 text-white font-weight-bold border rounded-0 shadow-sm">@item.Name</a>
                         }
 
@@ -130,42 +133,42 @@
                         <p class="project--item__desc">
                             @item.Description
                         </p>
-                        <a href="/bai-viet/@item.MetaTitle-@item.ID" class="btn btn--hover">Xem Chi Tiết</a>
+                        <a href="/@linkTinTuc/@item.MetaTitle-@item.ID" class="btn btn--hover">Xem Chi Tiết</a>
                     </div>
                 </div>
             }
 
-        <div class="row overflow-hidden">
-            @foreach (var item in listNews)
+            <div class="row overflow-hidden">
+                @foreach (var item in listNews)
 
-            {
-                <div class="col-md-6 col-xl-4 col-sm-12 mb-4"
-                     data-aos="fade-up"
-                     data-aos-delay="50">
-                    <div class="card">
-                        <div class="news--content__date date">
-                            @item.CreatedDate.ToString("dd") <br />
-                            <span>@item.CreatedDate.ToString("MM")-@item.CreatedDate.ToString("yyyy")</span>
-                        </div>
-                        <a href="/bai-viet/@item.MetaTitle-@item.ID">
-                            <img src="@item.Image" class="card-img-top" />
-                        </a>
+                {
+                    <div class="col-md-6 col-xl-4 col-sm-12 mb-4"
+                         data-aos="fade-up"
+                         data-aos-delay="50">
+                        <div class="card">
+                            <div class="news--content__date date">
+                                @item.CreatedDate.ToString("dd") <br />
+                                <span>@item.CreatedDate.ToString("MM")-@item.CreatedDate.ToString("yyyy")</span>
+                            </div>
+                            <a href="/bai-viet/@item.MetaTitle-@item.ID">
+                                <img src="@item.Image" class="card-img-top" />
+                            </a>
 
-                        <div class="card-body">
-                            <h5 class="card-title" style=" font-size: 1.25em; font-weight: bold;">
-                                @item.Name
-                            </h5>
-                            <p class="card-text" style=" font-size:1em">
-                                @item.Description
-                            </p>
-                            <a href="/bai-viet/@item.MetaTitle-@item.ID" class="--item__btn btn btn--hover">Xem Chi Tiết</a>
+                            <div class="card-body">
+                                <h5 class="card-title" style=" font-size: 1.25em; font-weight: bold;">
+                                    @item.Name
+                                </h5>
+                                <p class="card-text" style=" font-size:1em">
+                                    @item.Description
+                                </p>
+                                <a href="/@linkTinTuc/@item.MetaTitle-@item.ID" class="--item__btn btn btn--hover">Xem Chi Tiết</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
 
 
-        </div>
+            </div>
         </div>
         @if (ViewBag.Total > 0)
         {
@@ -177,7 +180,7 @@
             var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
             var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
 
-            var link = "/loai-bai-viet/" + category.MetaTitle + "-" + category.ID;
+            var link = "/"+ linkLoaiTinTuc+"/" + category.MetaTitle + "-" + category.ID;
             <nav style="verticle-align: middle; ">
                 <ul class="pagination">
                     @if (currentPage > ViewBag.First)

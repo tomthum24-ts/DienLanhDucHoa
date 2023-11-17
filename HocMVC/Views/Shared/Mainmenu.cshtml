@@ -1,6 +1,10 @@
 ﻿@*@model IEnumerable<Model.EF.Menu>*@
+@using Model.Enum;
 @{
     var footer = (Model.EF.Footer)@ViewBag.Footer;
+    var linkDichVu = LinkConstants.DichVu;
+    var linkLoaiDichVu = LinkConstants.LoaiDichVu;
+    var timKiem = LinkConstants.TimKiemDichVu;
 }
 <div id="my-header"></div>
 <!--navigation-->
@@ -18,7 +22,6 @@
                     <a class="nav-link dropdown-toggle"
                        href="#"
                        role="button"
-                       
                        aria-expanded="false">
                         GIỚI THIỆU
                     </a>
@@ -31,16 +34,15 @@
                     <a class="nav-link dropdown-toggle"
                        href="#"
                        role="button"
-                       
                        aria-expanded="false">
-                        BẤT ĐỘNG SẢN
+                        DỊCH VỤ
                     </a>
                     <div class="dropdown-menu">
                         @if (ViewBag.LoaiBDS != null && ViewBag.LoaiBDS.Count > 0)
                         {
                             foreach (var item in ViewBag.LoaiBDS)
                             {
-                                <a class="dropdown-item" href="/loai-du-an/@item.MetaTitle-@item.Id">@item.TenLoaiDuAn</a>
+                                <a class="dropdown-item" href="/@linkLoaiDichVu/@item.MetaTitle-@item.Id">@item.TenLoaiDuAn</a>
                             }
 
                         }
@@ -50,7 +52,6 @@
                     <a class="nav-link dropdown-toggle"
                        href="#"
                        role="button"
-                       
                        aria-expanded="false">
                         XÂY DỰNG
                     </a>
@@ -73,7 +74,6 @@
                         <a class="nav-link dropdown-toggle"
                            href="#"
                            role="button"
-                           
                            aria-expanded="false">
                             ẨM THỰC
                         </a>
@@ -100,7 +100,6 @@
                     <a class="nav-link dropdown-toggle"
                        href="#"
                        role="button"
-                       
                        aria-expanded="false">
                         TRUYỀN THÔNG
                     </a>
@@ -128,7 +127,7 @@
                        aria-controls="collapseExample">
                         <i class="bx bx-search"></i>
                     </a>
-                    <form action="/du-an/timkiem">
+                    <form action="/@timKiem">
                         <div class="collapse nav-search" id="collapseExample">
                             <div class="d-flex">
                                 <input class="nav-input" placeholder="Nhập từ khóa..." id="txtkeyword" name="keysearch" />
@@ -154,7 +153,7 @@
            aria-controls="collapseExample">
             <i class="bx bx-search"></i>
         </a>
-        <form action="/du-an/timkiem">
+        <form action="/@timKiem">
             <div class="collapse nav-search" id="collapseExample">
 
                 <div class="d-flex">
@@ -192,7 +191,7 @@
             <li class="nav-item dropdown nav-item--hover"
                 data-toggle="collapse"
                 href="#LinhVuc">
-                <a class="nav-link" href="#LinhVuc" role="button">BẤT ĐỘNG SẢN</a>
+                <a class="nav-link" href="#LinhVuc" role="button">DỊCH VỤ</a>
 
                 <span><i class="bx bxs-down-arrow"></i></span>
             </li>
@@ -202,7 +201,7 @@
                 {
                     foreach (var item in ViewBag.LoaiBDS)
                     {
-                        <a href="/loai-du-an/@item.MetaTitle-@item.Id" class="d-block sub-item lead">
+                        <a href="/@linkLoaiDichVu/@item.MetaTitle-@item.Id" class="d-block sub-item lead">
                             <span><i class="bx bxs-square"></i></span>@item.TenLoaiDuAn
                         </a>
                     }

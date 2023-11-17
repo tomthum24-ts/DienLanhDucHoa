@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace HocMVC
@@ -116,6 +112,12 @@ namespace HocMVC
                namespaces: new[] { "HocMVC.Controllers" }
            );
             routes.MapRoute(
+             name: "Project search",
+             url: "tim-kiem-dich-vu",
+             defaults: new { controller = "Project", action = "TimKiem", id = UrlParameter.Optional },
+             namespaces: new[] { "HocMVC.Controllers" }
+         );
+            routes.MapRoute(
             name: "project Detail",
             url: "dich-vu/{metatitle}-{id}",
             defaults: new { controller = "Project", action = "Detail", id = UrlParameter.Optional },
@@ -123,19 +125,19 @@ namespace HocMVC
 
           );
             //Xay dung
-            
+
             routes.MapRoute(
               name: "Xay Dung",
               url: "xay-dung",
               defaults: new { controller = "XayDung", action = "Index", id = UrlParameter.Optional },
               namespaces: new[] { "HocMVC.Controllers" }
           );
-              routes.MapRoute(
-              name: "Xay Dung Category",
-              url: "xay-dung/{metatitle}-{id}",
-              defaults: new { controller = "XayDung", action = "Category", id = UrlParameter.Optional },
-              namespaces: new[] { "HocMVC.Controllers" }
-          );
+            routes.MapRoute(
+            name: "Xay Dung Category",
+            url: "xay-dung/{metatitle}-{id}",
+            defaults: new { controller = "XayDung", action = "Category", id = UrlParameter.Optional },
+            namespaces: new[] { "HocMVC.Controllers" }
+        );
             routes.MapRoute(
           name: "xay dung Detail",
           url: "cong-trinh/{metatitle}-{id}",
@@ -156,14 +158,14 @@ namespace HocMVC
          defaults: new { controller = "AmThuc", action = "Index", id = UrlParameter.Optional },
          namespaces: new[] { "HocMVC.Controllers" }
 
-     );
-            routes.MapRoute(
-      name: "project search",
-      url: "du-an/timkiem",
-      defaults: new { controller = "Project", action = "TimKiem", id = UrlParameter.Optional },
-      namespaces: new[] { "HocMVC.Controllers" }
+        );
+           routes.MapRoute(
+         name: "tim kiem dich vu",
+         url: "tim-kiem-dich-vu",
+         defaults: new { controller = "Project", action = "TimKiem", id = UrlParameter.Optional },
+         namespaces: new[] { "HocMVC.Controllers" }
 
-  );
+        );
 
             // Giới thiệu
             routes.MapRoute(
@@ -200,7 +202,7 @@ namespace HocMVC
               defaults: new { controller = "Product", action = "Index", id = UrlParameter.Optional },
               namespaces: new[] { "HocMVC.Controllers" }
           );
-            //Default 
+            //Default
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

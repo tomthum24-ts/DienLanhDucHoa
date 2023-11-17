@@ -1,7 +1,10 @@
 ﻿@model Model.EF.DuAn
+@using Model.Enum;
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var linkDuAn = LinkConstants.DuAn;
+    var linkLoaiDuAn = LinkConstants.LoaiDuAn;
 }
 @section OpenGraph {
     <title>DỰ ÁN @Model.TenDuAn</title>
@@ -9,7 +12,7 @@
     <meta property="og:image" content="@Model.Image">
     <meta property="og:image:secure_url" content="@Model.Image">
     <meta property="og:description" content="@Model.Description">
-    <meta property="og:url" content="./du-an/@Model.MetaTitle-@Model.Id">
+    <meta property="og:url" content="./@linkDuAn/@Model.MetaTitle-@Model.Id">
     <meta property="og:site_name" content="Hoàng Gia Group">
     <meta name="description" content="@Model.Description">
 }

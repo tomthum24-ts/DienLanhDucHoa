@@ -15,13 +15,13 @@ namespace HocMVC.Controllers
         public ActionResult Index(int page = 1, int pageSize = 10)
         {
             int totalRecord = 0;
-            var project = new DuAnDao().ListAllPaging(ref totalRecord, page, pageSize);
-            ViewBag.LoaiDuAn= new LoaiDuAnDao().ListAll();
+            var project = new DuAnDao()?.ListAllPaging(ref totalRecord, page, pageSize);
+            ViewBag.LoaiDuAn= new LoaiDuAnDao()?.ListAll();
             ViewBag.Slide = new SlideDao().ListByGroup((int)EnumManHinh.DuAn);
             ViewBag.Total = totalRecord;
             ViewBag.Page = page;
-            ViewBag.Title = project?.FirstOrDefault().TenDuAn;
-            ViewBag.Description = project?.FirstOrDefault().Description;
+            ViewBag.Title = project?.FirstOrDefault()?.TenDuAn;
+            ViewBag.Description = project?.FirstOrDefault()?.Description;
 
             int maxPage = 5;
             int totalPage = 0;
@@ -38,12 +38,12 @@ namespace HocMVC.Controllers
         public ActionResult Category(int id=0, int page = 1, int pageSize = 10)
         {
             int totalRecord = 0;
-            var category = new DuAnDao().ListCategoryDuAn(id, ref totalRecord, page, pageSize);
-            ViewBag.LoaiDuAn = new LoaiDuAnDao().ListAll();
-            ViewBag.Slide = new SlideDao().ListByGroup((int)EnumManHinh.DuAn);
+            var category = new DuAnDao()?.ListCategoryDuAn(id, ref totalRecord, page, pageSize);
+            ViewBag.LoaiDuAn = new LoaiDuAnDao()?.ListAll();
+            ViewBag.Slide = new SlideDao()?.ListByGroup((int)EnumManHinh.DuAn);
             ViewBag.Total = totalRecord;
             ViewBag.Page = page;
-            var loaiDuAn = new LoaiDuAnDao().ListCategory(id);
+            var loaiDuAn = new LoaiDuAnDao()?.ListCategory(id);
             ViewBag.Title = loaiDuAn?.FirstOrDefault()?.TenLoaiDuAn ;
             ViewBag.Description = loaiDuAn?.FirstOrDefault()?.MetaDescriptions ;
             ViewBag.Id = id;

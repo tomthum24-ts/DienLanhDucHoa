@@ -1,8 +1,10 @@
 ﻿@model Model.EF.Contents
+@using Model.Enum;
 @{
 
     Layout = "~/Views/Shared/_Layout.cshtml";
-
+    var linkTinTuc = LinkConstants.TinTuc;
+    var linkLoaiTinTuc = LinkConstants.LoaiTinTuc;
 }
 @section OpenGraph {
     <title>@Model.Name</title>
@@ -10,7 +12,7 @@
     <meta property="og:image" content="@Model.Image">
     <meta property="og:image:secure_url" content="@Model.Image">
     <meta property="og:description" content="@Model.Description">
-    <meta property="og:url" content="./tin-tuc/@Model.MetaTitle-@Model.ID">
+    <meta property="og:url" content="./@linkTinTuc/@Model.MetaTitle-@Model.ID">
     <meta name="description" content="@Model.Description">
 }
 <div class="header-show d-flex justify-content-center p-0">
@@ -22,7 +24,7 @@
             {
                 foreach (var item in ViewBag.CateGoRyConTent)
                 {
-                    <a href="/loai-bai-viet/@item.MetaTitle-@item.ID"
+                    <a href="/@linkLoaiTinTuc/@item.MetaTitle-@item.ID"
                        class="project--nav__btn btn--hover btn btn-xl mr-2 text-white font-weight-bold border rounded-0 shadow-sm">@item.Name</a>
                 }
 
@@ -69,7 +71,7 @@
                 {
                     foreach (var item in ViewBag.CateGoRyConTent)
                     {
-                        <a href="/loai-bai-viet/@item.MetaTitle-@item.ID"
+                        <a href="/@linkLoaiTinTuc/@item.MetaTitle-@item.ID"
                            class="project--nav__btn btn btn--hover btn-xl mx-1 px-4 text-white font-weight-bold border rounded-0 py-2 shadow-sm">@item.Name</a>
                     }
 

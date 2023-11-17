@@ -1,9 +1,12 @@
 ﻿@model IEnumerable<Model.EF.DuAn>
+@using Model.Enum;
 @{
     ViewBag.Title = "Tìm kiếm";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int soThuTu = 0;
     var link = "/du-an";
+    var linkDuAn = LinkConstants.DichVu;
+    var linkLoaiDuAn = LinkConstants.LoaiDichVu;
 }
 @section OpenGraph {
     <title>Dự án do Hoàng Gia Group phân phối</title>
@@ -11,7 +14,7 @@
     <meta property="og:image" content="~/Public/Layout/Images/logo.png">
     <meta property="og:image:secure_url" content="~/Public/Layout/Images/logo.png">
     <meta property="og:description" content="Tổng hợp các dự án do Hoàng Gia Group Phân phối">
-    <meta property="og:url" content="./du-an">
+    <meta property="og:url" content="./@linkDuAn">
     <meta property="og:site_name" content="Tổng hợp các dự án do Hoàng Gia Group Phân phối">
     <meta name="description" content="Tổng hợp các dự án do Hoàng Gia Group Phân phối">
 }
@@ -64,7 +67,7 @@
                             <div data-aos="zoom-in"
                                  class="project--item__image"
                                  data-aos="zoom-in">
-                                <a href="@item.MetaTitle-@item.Id">
+                                <a href="@linkDuAn/@item.MetaTitle-@item.Id">
                                     <img class="bg-secondary image"
                                          src="@item.Image"
                                          alt="@item.Title" />
@@ -78,7 +81,7 @@
                             <p class="project--item__desc" style="font-size:1em">
                                 @item.MoTa
                             </p>
-                            <a href="@item.MetaTitle-@item.Id" class="project--item__btn btn btn--hover">XEM DỰ ÁN</a>
+                            <a href="@linkDuAn/@item.MetaTitle-@item.Id" class="project--item__btn btn btn--hover">XEM DỰ ÁN</a>
                         </div>
                     </div>
                 }
@@ -90,7 +93,7 @@
                             <div data-aos="zoom-in"
                                  class="project--item__image"
                                  data-aos="zoom-in">
-                                <a href="@item.MetaTitle-@item.Id">
+                                <a href="/@linkDuAn/@item.MetaTitle-@item.Id">
                                     <img class="bg-secondary image"
                                          src="@item.Image"
                                          alt="@item.Title" />
@@ -105,7 +108,7 @@
                             <p class="project--item__desc" style="font-size:1em">
                                 @item.MoTa
                             </p>
-                            <a href="@item.MetaTitle-@item.Id" class="project--item__btn btn btn--hover">XEM DỰ ÁN</a>
+                            <a href="@linkDuAn/@item.MetaTitle-@item.Id" class="project--item__btn btn btn--hover">XEM DỰ ÁN</a>
                         </div>
                     </div>
                 }
