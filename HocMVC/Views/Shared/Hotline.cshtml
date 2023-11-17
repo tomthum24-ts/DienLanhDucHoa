@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Model.EF.HotLine>
+@{
+
+
+}
+<div class="box-contact">
+    <div class="box-btnContact">
+        <img src="~/Public/Layout/Images/Hotline.png" alt="Hotline" />
+    </div>
+    <div class="box-showContact">
+        @if (Model != null)
+        {   
+            foreach (var item in Model)
+            {
+                <a href="@item.Link" target="_blank" class="box-contactIcon">
+                    <img src="@item.Image" alt="@item.Name" />
+                </a>
+            }
+
+        }
+    </div>
+</div>
+

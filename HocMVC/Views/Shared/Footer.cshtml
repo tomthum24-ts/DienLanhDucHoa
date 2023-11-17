@@ -1,0 +1,109 @@
+﻿@model Model.EF.LienHe
+@{
+    var footer = (Model.EF.Footer)@ViewBag.Footer;
+}
+
+@using (Html.BeginForm("AddLienHe", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="section ">
+        <footer class="footer footer--hide d-flex flex-column justify-content-center">
+            <div class="footer--head">
+                <img src="@footer.Image"
+                     alt=""
+                     class="footer--img__top img-fluid" />
+                @*<div class="footer--head__box">
+                        <h2 class="footer--head__title shadow bg-white rounded-sm"
+                            data-aos="fade-up">
+                            Add captions to your slides easily with the
+                        </h2>
+                        <a href="" class="btn btn--hover" data-aos="fade-up">contact</a>
+                    </div>*@
+            </div>
+            <div class="footer--body bg-transparent d-flex justify-content-center">
+                <div class="row p-3">
+                    <div class="col-xl-6 col-md-6 col-sm-12 d-flex justify-content-start flex-column align-items-start">
+                     
+                        <div class="media-img" data-aos="fade-up">
+                            <img src="@footer.Logo"
+                                 alt=""
+                                 class="footer--body__img mb-3" />
+                            <h5 class="text-white text-center" data-aos="fade-up">
+                                @footer.Name
+                            </h5>
+                        </div>
+                        <div class="footer--info text-left">
+                            <p data-aos="fade-up">
+                                <span>Trụ sở: </span> @footer.DiaChi
+                            </p>
+                            <p data-aos="fade-up">
+                                <span>Hotline: </span> @footer.Hotline
+                            </p>
+                            <p data-aos="fade-up">
+                                <span>Website: </span> @footer.Website
+                            </p>
+                        </div>
+                        <div data-aos="fade-up" class="rowLinkBottom">
+                            @if (ViewBag.Social != null)
+                            {
+                                foreach (var item in ViewBag.Social)
+                                {
+                                    <a href="@item.Link" target="_blank">
+                                        <img src="@item.Image"
+                                             alt="@item.Name"
+                                             class="footer--body__img2 mb-3" />
+                                    </a>
+                                }
+                            }
+
+
+                            @*<a href="">
+                <img src="https://cdn-icons-png.flaticon.com/512/2504/2504942.png"
+                     alt=""
+                     class="footer--body__img2 mb-3" />
+            </a>
+            <a href="">
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111398.png"
+                     alt=""
+                     class="footer--body__img2 mb-3" />
+            </a>*@
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-md-6 col-sm-12">
+                        <h3 class="text-success font-weight-bold" data-aos="fade-up">
+                            FORM LIÊN HỆ
+                        </h3>
+                        <form action="">
+                            <div class="form-group" data-aos="fade-up">
+                                <input type="text" id="Name" name="Name"
+                                       class="form-control"
+                                       placeholder="Họ Tên (*)" />
+                            </div>
+                            <div class="form-group" data-aos="fade-up">
+                                <input type="text" id="PhoneNumber" name="PhoneNumber"
+                                       maxlength="10"
+                                       class="form-control"
+                                       placeholder="Số Điện Thoại(*)" />
+                            </div>
+                            <div class="form-group" data-aos="fade-up">
+                                <input type="email" id="Email" name="Email"
+                                       class="form-control"
+                                       placeholder="Email" />
+                            </div>
+                            <div class="form-group" data-aos="fade-up">
+                                <textarea class="form-control" id="Detail" name="Detail"
+                                          placeholder="Nội Dung (*)"
+                                          rows="3"></textarea>
+                            </div>
+                            <button data-aos="fade-up"
+                                    type="submit"
+                                    class="btn btn--hover px-4 shadow-lg">
+                                Gửi
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+}

@@ -1,0 +1,192 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var aboutUs = (Model.EF.About)@ViewBag.AboutUs;
+}
+@section OpenGraph {
+    <title>Về Hoàng Gia Group</title>
+    <meta property="og:title" content="Về Hoàng Gia Group">
+    <meta property="og:image" content="~/Public/Layout/Images/logo.png">
+    <meta property="og:image:secure_url" content="~/Public/Layout/Images/logo.png">
+    <meta property="og:description" content="Về Hoàng Gia Group ">
+    <meta property="og:url" content="/gioi-thieu">
+    <meta property="og:site_name" content="Về Hoàng Gia Group">
+    <meta name="description" content="Về Hoàng Gia Group">
+}
+<div id="my-scrollbar" class="my-container" data-scrollbar>
+    <!--start-->
+    <!--Background-->
+
+    @if (ViewBag.Slide != null && ViewBag.Slide.Count > 0)
+    {
+        foreach (var item in ViewBag.Slide)
+        {
+            <div class="overviews-background owl-carousel">
+                <div class="item">
+                    <img src="@item.Image" alt="" />
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="overviews-background owl-carousel">
+            <div class="item">
+                <img src="/Public/Layout/Images/pexels-terry-magallanes-2635038.jpg" alt="" />
+            </div>
+            <div class="item">
+                <img src="/Public/Layout/Images/img1.jpg" alt="" />
+            </div>
+
+
+        </div>
+    }
+
+
+    <div class="header-setTop"></div>
+    <div class="overviews container-fluid">
+        <!-- Content -->
+        <p style="text-align:center"><span data-aos="fade-left" style="font-size:11pt"><span style="font-family:Calibri,&quot;sans-serif&quot;"><span style="font-size:26.5pt"><span style="font-family:&quot;Helvetica&quot;,&quot;sans-serif&quot;"><span style="color:#ff9800">GIỚI THIỆU VỀ HO&Agrave;NG GIA LAND</span></span></span></span></span></p>
+        @Html.Raw(aboutUs.Detail)
+    </div>
+    <!-- History -->
+    @*<section class="overviews-history" data-aos="fade-up">
+            <div class="overviews-history_title" data-aos="fade-right">
+                CỘT MỐC PHÁT TRIỂN
+            </div>
+            <div class="overviews-history_box owl-carousel">
+                <div class="item" data-aos="fade-up" data-aos-duration="500">
+                    <div class="overviews-process_box box">
+                        <h5 class="box-year">2020.</h5>
+                        <div class="box-txt">
+                            <p>- Nhân sự tăng lên 400 người</p>
+                            <p>
+                                - Thiết lập quan hệ đối tác chiến lược với nhiều chủ đầu tư,
+                                ngân hàng như U&I Real, Vietcombank, Sacombank, ACB, VPBank...
+                            </p>
+                            <p>- Doanh thu tăng trường 40%</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item" data-aos="fade-up" data-aos-duration="800">
+                    <div class="overviews-process_box box">
+                        <h5 class="box-year">2019.</h5>
+                        <div class="box-txt">
+                            <p>
+                                - Phát triển hệ thống gồm 4 chi nhánh (Hoàng Gia Group TDC, Hoàng Gia Group
+                                TAC, Hoàng Gia Group TPM, Hoàng Gia Group TDM)
+                            </p>
+                            <p>
+                                - Mở rộng hoạt động kinh doanh tại TPHCM, nhân sự tăng lên 300
+                                người
+                            </p>
+                            <p>
+                                - Phân phối, phát triển thành công 1.028 sản phẩm, tăng 60% so
+                                với năm 2018
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item" data-aos="fade-up" data-aos-duration="1100">
+                    <div class="overviews-process_box box">
+                        <h5 class="box-year">2018.</h5>
+                        <div class="box-txt">
+                            <p>
+                                - Tháng 7 năm 2018 thành lập công ty và khai trương trụ sở tại
+                                Thành phố Thủ Dầu Một
+                            </p>
+                            <p>
+                                - Phân phối thành công gần 700 sản phẩm đất nền, nhà phố tại
+                                Bình Dương, Bình Phước
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+    <!-- Value -->
+    @*<section class="overviews-value value">
+            <div class="value-title">
+                <h2 data-aos="fade-right">GIÁ TRỊ CỐT LÕI</h2>
+                <h5 data-aos="fade-left">Đồng hành cùng phát triển</h5>
+            </div>
+            <div class="value-list">
+                <div class="row m-0 value-box">
+                    <div class="col-md-6 col-sm-12" data-aos="fade-up">
+                        <h5>TẦM NHÌN</h5>
+                        <p>
+                            - Thương hiệu Hoàng Gia Group phát triển vững mạnh, nằm trong nhóm những
+                            nhà phát triển bất động sản hàng đầu tại Việt Nam
+                        </p>
+                        <p>
+                            - Hợp tác với các đối tác quốc tế và niêm yết cổ phiếu trên thị
+                            trường chứng khoán
+                        </p>
+                        <p>
+                            - Xây dựng hệ thống kinh doanh tại các tỉnh, thành có thị trường
+                            bất động sản phát triển trên cả nước
+                        </p>
+                        <p>- Đầu tư các dự án quy mô khu đô thị với đầy đủ tiện ích</p>
+                        <p>
+                            - Phát triển và phân phối tất cả các phân khúc sản phẩm bất động
+                            sản
+                        </p>
+                    </div>
+                    <div class="col-md-6 col-sm-12 value-box_img mb-5"
+                         data-aos="fade-up">
+                        <img src="/Public/Layout/Images/cach-thuc-de-mot-thuong-hieu-co-tam-nhin-su-menh-887c2.jpg" alt="" />
+                    </div>
+                </div>
+                <div class="row m-0 flex-row-reverse value-box">
+                    <div class="col-md-6 col-sm-12" data-aos="fade-up">
+                        <h5>SỨ MỆNH</h5>
+                        <p>
+                            - Góp phần xây dựng và phát triển thị trường bất động sản minh
+                            bạch, bền vững
+                        </p>
+                        <p>
+                            - Góp phần tích cực vào lĩnh vực phát triển đô thị tại Việt Nam
+                        </p>
+                        <p>- Kiến tạo những giá trị tốt đẹp cho cộng đồng và xã hội</p>
+                        <p>
+                            - Góp phần mang đến cơ hội an cư và đầu tư hấp dẫn cho khách
+                            hàng, đối tác
+                        </p>
+                    </div>
+                    <div class="col-md-6 col-sm-12 value-box_img mb-4"
+                         data-aos="fade-up">
+                        <img src="/Public/Layout/Images/Dau-Tu-Tai-Chinh.jpeg" alt="" />
+                    </div>
+                </div>
+                <div class="row m-0 value-box">
+                    <div class="col-md-6 col-sm-12" data-aos="fade-up">
+                        <h5>TRIẾT LÝ KINH DOANH</h5>
+                        <p>
+                            - Luôn phục vụ khách hàng “TẬN TÂM”, “CHUYÊN NGHIỆP”, “UY TÍN”
+                        </p>
+                        <p>
+                            - Chú trọng xây dựng mối quan hệ tốt đẹp với các khách hàng và
+                            đối tác
+                        </p>
+                        <p>- Góp phần xây dựng xã hội nhân văn</p>
+                    </div>
+                    <div class="col-md-6 col-sm-12 value-box_img mb-4"
+                         data-aos="fade-up">
+                        <img src="/Public/Layout/Images/nhan-vien-kinh-doanh-bat-dong-san.jpg" alt="" />
+                    </div>
+                </div>
+            </div>
+        </section>*@
+    <!--Content-->
+    <!--Footer-->
+    @{Html.RenderAction("Footer", "Home"); }
+</div>
+
+<style>
+    img.cangiua {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>

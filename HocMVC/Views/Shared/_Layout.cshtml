@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/png" href="~/Public/Layout/Images/logo.png" />
+    @*<title>Hoàng gia land</title>*@
+    @RenderSection("OpenGraph", required: false)
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    @System.Web.Optimization.Styles.Render("~/Styles")
+    <!--Boxicon-->
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+          rel="stylesheet" />
+
+    <!-- Google tag (gtag.js) -->
+    @*<script async src="https://www.googletagmanager.com/gtag/js?id=G-JQW36VFMVR"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-JQW36VFMVR');
+        </script>*@
+    @{Html.RenderAction("Script_Header", "Home"); }
+</head>
+<body>
+
+    @{Html.RenderAction("Hotline", "Home"); }
+    <!--PageLoading Logo-->
+    <!--Start Menu-->
+    @{Html.RenderAction("Mainmenu", "Home"); }
+    <!--EndMenu-->
+    <!--start-->
+
+    @RenderBody()
+    <div id="my-header"></div>
+    <div id="my-scrollbar"></div>
+
+    @System.Web.Optimization.Scripts.Render("~/Js")
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,228 @@
+﻿@model IEnumerable<Model.EF.Contents>
+@{
+    ViewBag.Title = "Tin tức";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listActive = Model.Select(x => x.ID).FirstOrDefault();
+    var listNewsMain = Model.Where(x => x.ID == listActive).ToList();
+    var listNews = Model.Where(x => x.ID != listActive).ToList();
+}
+@section OpenGraph {
+    <title>Danh sách tin tức</title>
+    <meta property="og:title" content="Danh sách tin tức">
+    <meta property="og:image" content="~/Public/Layout/Images/logo.png">
+    <meta property="og:image:secure_url" content="~/Public/Layout/Images/logo.png">
+    <meta property="og:description" content="Tổng hợp các tin tức về bất động sản ">
+    <meta property="og:url" content="./tin-tuc">
+    <meta property="og:site_name" content="Tổng hợp các tin tức về bất động sản">
+    <meta name="description" content="Tổng hợp các tin tức về bất động sản">
+}
+<!-- Blog -->
+<!--Background-->
+<div class="header-show d-flex justify-content-center p-0">
+    <div class="project--header justify-content-start flex-column">
+        <div class="project--nav d-flex justify-content-start flex-wrap align-items-center px-md-5">
+            <a href="/tin-tuc"
+               class="project--nav__btn btn--hover btn btn-xl mr-2 text-white border rounded-0 shadow-sm active">TẤT CẢ</a>
+            @if (ViewBag.CateGoRyConTent != null || ViewBag.CateGoRyConTent.Count == 0)
+            {
+                foreach (var item in ViewBag.CateGoRyConTent)
+                {
+                    <a href="/loai-bai-viet/@item.MetaTitle-@item.ID"
+                       class="project--nav__btn btn btn--hover btn-xl mr-2 text-white font-weight-bold border rounded-0 shadow-sm">@item.Name</a>
+                }
+
+            }
+
+        </div>
+    </div>
+</div>
+
+<div id="my-scrollbar" class="my-container" data-scrollbar>
+    <!--Background-->
+    @if (ViewBag.Slide != null && ViewBag.Slide.Count > 0)
+    {
+        <div class="overviews-background owl-carousel">
+            @foreach (var item in ViewBag.Slide)
+            {
+                <div class="item">
+                    <img src="@item.Image" alt="" />
+                </div>
+            }
+        </div>
+
+    }
+    else
+    {
+        <div class="overviews-background owl-carousel">
+            <div class="item">
+                <img src="/Public/Layout/Images/pexels-terry-magallanes-2635038.jpg" alt="" />
+            </div>
+            <div class="item">
+                <img src="/Public/Layout/Images/img1.jpg" alt="" />
+            </div>
+
+
+        </div>
+    }
+    <!--start-->
+<div class="container project">
+    <div class="project--header d-flex justify-content-start flex-column"
+         data-aos="fade-up">
+        <h2 class="project--header__title mt-2 display-4 text-warning">
+            TRUYỀN THÔNG
+        </h2>
+        <div class="project--nav d-flex justify-content-start flex-wrap align-items-center">
+            <a href="/tin-tuc"
+               class="project--nav__all btn--hover btn btn-xl mr-1 text-white border rounded-0 shadow-sm active">TẤT CẢ</a>
+            @if (ViewBag.CateGoRyConTent != null || ViewBag.CateGoRyConTent.Count == 0)
+            {
+                foreach (var item in ViewBag.CateGoRyConTent)
+                {
+
+                    <a href="/loai-bai-viet/@item.MetaTitle-@item.ID"
+                       class="project--nav__homeCity btn btn--hover btn-xl mr-1 text-white font-weight-bold border rounded-0 shadow-sm">@item.Name</a>
+                }
+
+            }
+
+        </div>
+    </div>
+    <div class="header-setTop"></div>
+    <div class="project--list">
+        @foreach (var item in listNewsMain)
+        {
+            <div class="row project--item justify-content-center align-items-center"
+                 data-aos="fade-right">
+                <div class="col-xl-6 col-md-6 col-sm-12 project--item__img p-0">
+                    <div data-aos="zoom-in" class="project--item__image">
+                        <a href="bai-viet/@item.MetaTitle-@item.ID">
+                            <img class="bg-secondary image"
+                                 src="@item.Image"
+                                 alt="@item.MetaTitle" />
+                        </a>
+
+                    </div>
+                </div>
+                <div class="col-xl-6 col-md-6 col-sm-12 p-0 project--item__sub d-flex align-items-start flex-column justify-content-center pl-md-5">
+                    <div class="project--item__title font-weight-bold d-flex">
+                        <div class="details--date text-center">
+                            @item.CreatedDate.ToString("dd") <br />
+                            <span>@item.CreatedDate.ToString("MM")-@item.CreatedDate.ToString("yyyy")</span>
+                        </div>
+                        <h3 class="ml-3">@item.Name</h3>
+                    </div>
+                    <p class="project--item__desc">
+                        @item.Description
+                    </p>
+                    <a href="bai-viet/@item.MetaTitle-@item.ID" class="btn btn--hover">Xem Chi Tiết</a>
+                </div>
+            </div>
+        }
+
+        <div class="row overflow-hidden">
+            @foreach (var item in listNews)
+
+            {
+                <div class="col-md-6 col-xl-4 col-sm-12 mb-4"
+                     data-aos="fade-up"
+                     data-aos-delay="50">
+                    <div class="card">
+                        <div class="news--content__date date">
+                            @item.CreatedDate.ToString("dd") <br />
+                            <span>@item.CreatedDate.ToString("MM")-@item.CreatedDate.ToString("yyyy")</span>
+                        </div>
+                        <a href="bai-viet/@item.MetaTitle-@item.ID">
+                            <img src="@item.Image" class="card-img-top" />
+                        </a>
+
+                        <div class="card-body">
+                            <h5 class="card-title" style=" font-size: 1.25em; font-weight: bold;">
+                                @item.Name
+                            </h5>
+                            <p class="card-text" style=" font-size:1em">
+                                @item.Description
+                            </p>
+                            <a href="bai-viet/@item.MetaTitle-@item.ID" class="--item__btn btn btn--hover">Xem Chi Tiết</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+    @if (ViewBag.Total > 0)
+    {
+        var pageDisplay = (int)ViewBag.MaxPage;
+        int totalPage = (int)ViewBag.TotalPage;
+        int currentPage = ((int)ViewBag.Page);
+
+        // Create numeric links
+        var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+        var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+        var link = "/tin-tuc";
+        <nav style="verticle-align: middle; ">
+            <ul class="pagination">
+                @if (currentPage > ViewBag.First)
+                {
+                    <li style="margin-right:5px; margin-top:5px"><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i>Trang đầu</a></li>
+                    @*<li>
+                            <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev">Trang trước<i class="fa fa-angle-left"></i></a>
+                        </li>*@
+
+                }
+                @for (int i = startPageIndex; i <= endPageIndex; i++)
+                {
+                    <div class="btn-group" role="group" aria-label="First group">
+                        @if (currentPage == i)
+                        {
+
+                            <a href="@link?page=@i" class="active" title="Trang @i"><button style="margin-right: 5px; color: black" type="button" class="btn btn-secondary mb-4">@i</button> </a>
+
+
+
+                        }
+                        else
+                        {
+                            <a href="@link?page=@i" class="active" title="Trang @i"><button style="margin-right: 5px; color: white" type="button" class="btn btn-secondary mb-4">@i</button> </a>
+                        }
+                    </div>
+                }
+                @if (currentPage < totalPage)
+                {
+                    @*<li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau">Trang sau<i class="fa fa-angle-right"></i></a></li>*@
+                    <li style="margin-right:5px;margin-top:5px"> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối">Trang cuối<i class="fa fa-angle-double-right"></i></a></li>
+                }
+
+            </ul>
+        </nav>
+
+    }
+    else
+    {
+        <div class="row project--item justify-content-center align-items-center"
+             data-aos="fade-left">
+            <img class="bg-secondary image" style="max-height:400px; max-width:400px"
+                 src="~/Public/Layout/Images/Nodata.jpg"
+                 alt="" />
+        </div>
+    }
+
+</div>
+    @{Html.RenderAction("Footer", "Home"); }
+</div>
+<style>
+    .my-container .btn::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-color: #ffa500;
+        border-radius: 3px;
+        transition: .4s all ease-in-out 0s;
+    }
+</style>

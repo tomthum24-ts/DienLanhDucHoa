@@ -1,0 +1,305 @@
+﻿@*@model IEnumerable<Model.EF.Menu>*@
+@{
+    var footer = (Model.EF.Footer)@ViewBag.Footer;
+}
+<div id="my-header"></div>
+<!--navigation-->
+<header class="header container-fluid" style="width: 100%">
+    <nav class="navbar navbar-expand-xl p-0">
+        <a class="navbar-brand" href="/">
+            <img src="@footer.Logo" alt="" />
+        </a>
+        <button class="navbar-toggler" type="button">
+            <i class="bx bx-menu" onclick="openMenu()"></i>
+        </button>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item nav-item--hover dropdown">
+                    <a class="nav-link dropdown-toggle"
+                       href="#"
+                       role="button"
+                       
+                       aria-expanded="false">
+                        GIỚI THIỆU
+                    </a>
+                    <div class="dropdown-menu">
+                        @*<a class="dropdown-item" href="/ban-dieu-hanh">HĐQT & Ban Điều Hành</a>*@
+                        <a class="dropdown-item" href="/gioi-thieu">Về chúng tôi</a>
+                    </div>
+                </li>
+                <li class="nav-item nav-item--hover dropdown">
+                    <a class="nav-link dropdown-toggle"
+                       href="#"
+                       role="button"
+                       
+                       aria-expanded="false">
+                        BẤT ĐỘNG SẢN
+                    </a>
+                    <div class="dropdown-menu">
+                        @if (ViewBag.LoaiBDS != null && ViewBag.LoaiBDS.Count > 0)
+                        {
+                            foreach (var item in ViewBag.LoaiBDS)
+                            {
+                                <a class="dropdown-item" href="/loai-du-an/@item.MetaTitle-@item.Id">@item.TenLoaiDuAn</a>
+                            }
+
+                        }
+                    </div>
+                </li>
+                <li class="nav-item nav-item--hover dropdown">
+                    <a class="nav-link dropdown-toggle"
+                       href="#"
+                       role="button"
+                       
+                       aria-expanded="false">
+                        XÂY DỰNG
+                    </a>
+                    <div class="dropdown-menu">
+                        @if (ViewBag.XayDung != null && ViewBag.XayDung.Count > 0)
+                        {
+                            foreach (var item in ViewBag.XayDung)
+                            {
+                                <a class="dropdown-item" href="/loai-xay-dung/@item.MetaTitle-@item.Id">@item.TenLoaiDuAn</a>
+                            }
+
+                        }
+                        <a class="dropdown-item" href="/xay-dung">Công trình tiêu biểu</a>
+
+                    </div>
+                </li>
+                @if (ViewBag.AmThuc != null && ViewBag.AmThuc.Count > 0)
+                {
+                    <li class="nav-item nav-item--hover dropdown">
+                        <a class="nav-link dropdown-toggle"
+                           href="#"
+                           role="button"
+                           
+                           aria-expanded="false">
+                            ẨM THỰC
+                        </a>
+                        <div class="dropdown-menu">
+
+                            @foreach (var item in ViewBag.AmThuc)
+                            {
+                                <a class="dropdown-item" href="/am-thuc/@item.MetaTitle-@item.Id">@item.TenDuAn</a>
+                            }
+                        </div>
+                    </li>
+
+                }
+                else
+                {
+                    <li class="nav-item nav-item--hover">
+                        <a class="nav-link" href="/">ẨM THỰC</a>
+                    </li>
+                }
+
+
+
+                <li class="nav-item nav-item--hover dropdown">
+                    <a class="nav-link dropdown-toggle"
+                       href="#"
+                       role="button"
+                       
+                       aria-expanded="false">
+                        TRUYỀN THÔNG
+                    </a>
+                    <div class="dropdown-menu">
+                        @if (ViewBag.LoaiTin != null && ViewBag.LoaiTin.Count > 0)
+                        {
+                            foreach (var item in ViewBag.LoaiTin)
+                            {
+                                <a class="dropdown-item" href="/loai-bai-viet/@item.MetaTitle-@item.ID">@item.Name</a>
+                            }
+
+                        }
+                    </div>
+                </li>
+
+                <li class="nav-item nav-item--hover">
+                    <a class="nav-link" href="/tuyen-dung">TUYỂN DỤNG</a>
+                </li>
+                <li class="navbar-nav-tool">
+                    <a class="nav-link nav-rounded"
+                       data-toggle="collapse"
+                       href="#collapseExample"
+                       role="button"
+                       aria-expanded="false"
+                       aria-controls="collapseExample">
+                        <i class="bx bx-search"></i>
+                    </a>
+                    <form action="/du-an/timkiem">
+                        <div class="collapse nav-search" id="collapseExample">
+                            <div class="d-flex">
+                                <input class="nav-input" placeholder="Nhập từ khóa..." id="txtkeyword" name="keysearch" />
+                                <button class="nav-button btn-primary">Search</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+@*<div class="header-setTop"></div>*@
+<div class="menu" id="myMenu">
+
+    <div class="menu--header">
+        <a class="nav-link rounded"
+           data-toggle="collapse"
+           href="#collapseExample"
+           role="button"
+           aria-expanded="false"
+           aria-controls="collapseExample">
+            <i class="bx bx-search"></i>
+        </a>
+        <form action="/du-an/timkiem">
+            <div class="collapse nav-search" id="collapseExample">
+
+                <div class="d-flex">
+                    <input class="nav-input" placeholder="Nhập từ khóa..." id="txtkeyword" name="keysearch" />
+                    <button class="nav-button btn-primary">Search</button>
+                </div>
+
+            </div>
+        </form>
+        <a onclick="closeMenu()"
+           class="nav-link rounded"
+           style="cursor: pointer">
+            <i class="bx bx-x"></i>
+        </a>
+    </div>
+    <div class="menu--body">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown nav-item--hover"
+                data-toggle="collapse"
+                href="#GioiThieu">
+                <a class="nav-link" href="#GioiThieu" role="button">GIỚI THIỆU</a>
+
+                <span><i class="bx bxs-down-arrow"></i></span>
+            </li>
+
+            <div class="collapse multi-collapse sub-link" id="GioiThieu">
+                <a href="/ban-dieu-hanh" class="d-block sub-item lead">
+                    <span><i class="bx bxs-square"></i></span>HĐQT & Ban Điều Hành
+                </a>
+                <a href="/gioi-thieu " class="d-block sub-item lead">
+                    <span><i class="bx bxs-square"></i></span>Về chúng tôi
+                </a>
+            </div>
+
+            <li class="nav-item dropdown nav-item--hover"
+                data-toggle="collapse"
+                href="#LinhVuc">
+                <a class="nav-link" href="#LinhVuc" role="button">BẤT ĐỘNG SẢN</a>
+
+                <span><i class="bx bxs-down-arrow"></i></span>
+            </li>
+
+            <div class="collapse multi-collapse sub-link" id="LinhVuc">
+                @if (ViewBag.LoaiBDS != null && ViewBag.LoaiBDS.Count > 0)
+                {
+                    foreach (var item in ViewBag.LoaiBDS)
+                    {
+                        <a href="/loai-du-an/@item.MetaTitle-@item.Id" class="d-block sub-item lead">
+                            <span><i class="bx bxs-square"></i></span>@item.TenLoaiDuAn
+                        </a>
+                    }
+
+                }
+            </div>
+
+            <li class="nav-item dropdown nav-item--hover"
+                data-toggle="collapse"
+                href="#XayDung">
+                <a class="nav-link" href="#XayDung" role="button">XÂY DỰNG</a>
+
+                <span><i class="bx bxs-down-arrow"></i></span>
+            </li>
+
+            <div class="collapse multi-collapse sub-link" id="XayDung">
+                @if (ViewBag.XayDung != null && ViewBag.XayDung.Count > 0)
+                {
+                    foreach (var item in ViewBag.XayDung)
+                    {
+                        <a href="/loai-xay-dung/@item.MetaTitle-@item.Id" class="d-block sub-item lead">
+                            <span><i class="bx bxs-square"></i></span>@item.TenLoaiDuAn
+                        </a>
+                    }
+                    <a href="/xay-dung" class="d-block sub-item lead">
+                        <span><i class="bx bxs-square"></i></span>Công trình tiêu biểu
+                    </a>
+                }
+            </div>
+            @if (ViewBag.AmThuc != null && ViewBag.AmThuc.Count > 0)
+            {
+
+                <li class="nav-item dropdown nav-item--hover"
+                    data-toggle="collapse"
+                    href="#AmThuc">
+                    <a class="nav-link" href="#AmThuc" role="button">ẨM THỰC</a>
+
+                    <span><i class="bx bxs-down-arrow"></i></span>
+                </li>
+
+                <div class="collapse multi-collapse sub-link" id="AmThuc">
+
+                    @foreach (var item in ViewBag.AmThuc)
+                    {
+                        <a href="/am-thuc/@item.MetaTitle-@item.Id" class="d-block sub-item lead">
+                            <span><i class="bx bxs-square"></i></span>@item.TenDuAn
+                        </a>
+                    }
+
+
+                </div>
+            }
+            else
+            {
+
+                <a class="nav-link" href="">
+                <li class="nav-item nav-item--hover">
+                    ẨM THỰC
+                </li>
+                </a>
+            }
+
+
+
+            <li class="nav-item dropdown nav-item--hover"
+                data-toggle="collapse"
+                href="#TruyenThong">
+                <a class="nav-link" href="#TruyenThong" role="button">TRYỀN THÔNG</a>
+
+                <span><i class="bx bxs-down-arrow"></i></span>
+            </li>
+
+            <div class="collapse multi-collapse sub-link" id="TruyenThong">
+                @if (ViewBag.LoaiTin != null && ViewBag.LoaiTin.Count > 0)
+                {
+                    foreach (var item in ViewBag.LoaiTin)
+                    {
+                        <a href="/loai-bai-viet/@item.MetaTitle-@item.ID" class="d-block sub-item lead">
+                            <span><i class="bx bxs-square"></i></span>@item.Name
+                        </a>
+                    }
+
+                }
+
+
+            </div>
+            <a class="nav-link" href="/tuyen-dung">
+            <li class="nav-item nav-item--hover">
+                TUYỂN DỤNG
+            </li>
+            </a>
+
+
+        </ul>
+    </div>
+    <div class="menu--bottom">
+        @*<a href="" class="btn btn-register">Đăng Ký</a>
+            <a href="" class="btn btn-start">Bắt Đầu</a>*@
+    </div>
+</div>

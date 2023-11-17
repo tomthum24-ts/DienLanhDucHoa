@@ -1,0 +1,85 @@
+﻿@model List<Model.ViewModel.QuanLyViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+@section jsfooter{
+    <script src="~/Public/Controller/QuanLyController.js"></script>
+    <script src="~/Public/dist/js/mustache.min.js"></script>
+}
+div class="card">
+<div class="card-header">
+    <h3 class="card-title">Danh sách quản lý</h3>
+    <div class="form-group">
+        <a href="/Admin/quanly/Create">
+            <button class="btn btn-success btn-lg float-right"
+                    type="submit">
+                Thêm mới
+            </button>
+        </a>
+    </div>
+</div>
+<!-- /.card-header -->
+<div class="card-body">
+    <table id="example1" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Tên Công ty</th>
+                <th>Stt</th>
+                <th>Họ tên</th>
+                <th>Hình ảnh</th>
+                <th>Chức vụ</th>
+                <th>Chi tiết</th>
+                <th>Giới tính</th>
+                <th>Trạng thái</th>
+                <th>#</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr id="row_@item.ID">
+                        <td>@item.TenCongTy</td>
+                        <td>@item.STT</td>
+                        <td>@item.Name</td>
+                        <td><img src="@item.Avata" class="img-responsive" style=" width:40px; height:40px;" /></td>
+                        <td>@item.TenChucVu </td>
+                        <td><div class="detail-item" style="max-width:400px; display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:5;overflow:hidden">@Html.Raw(item.ChiTiet)</div> </td>
+                        @if (item.GioiTinh == true)
+                        {
+                            <td>Nam</td>
+                        }
+                        else
+                        {
+                            <td>Nữ</td>
+                        }
+                        <td><a href="#" class="btn-active" data-id="@item.ID">@Html.Raw(item.Status ? "Kích hoạt" : "Khoá")</a></td>
+                        <td>
+                            <a href="/Admin/quanly/Edit/@item.ID">Sửa</a>
+                            |
+                            @Ajax.ActionLink("Xoá", "Delete", new { @id = item.ID }, new AjaxOptions
+                       {
+                           Confirm = "Bạn có muốn xoá bản ghi này?",
+                           OnComplete = "$('#row_" + @item.ID + "').remove()",
+                           HttpMethod = "Delete"
+                       })
+                        </td>
+                    </tr>
+                }
+            }
+
+
+
+        </tbody>
+
+    </table>
+    @*@Html.PagedListPager(Model,Page=>Url.Action("Index",new {Page }))*@
+</div>
+<!-- /.card-body -->
+</div>
+
+

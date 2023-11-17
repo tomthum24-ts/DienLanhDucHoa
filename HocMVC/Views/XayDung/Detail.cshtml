@@ -1,0 +1,115 @@
+﻿@model Model.EF.XayDung
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section OpenGraph {
+    <title> @Model.TenDuAn</title>
+    <meta property="og:title" content="@Model.TenDuAn">
+    <meta property="og:image" content="@Model.Image">
+    <meta property="og:image:secure_url" content="@Model.Image">
+    <meta property="og:description" content="@Model.Description">
+    <meta property="og:url" content="./cong-trinh/@Model.MetaTitle-@Model.Id">
+    <meta property="og:site_name" content="Hoàng Gia Group">
+    <meta name="description" content="@Model.Description">
+}
+
+<div class="header-show d-flex justify-content-center p-0">
+    <div class="project--header justify-content-start flex-column">
+        <div class="project--nav d-flex justify-content-start flex-wrap align-items-center px-md-5"
+             id="my-header">
+            @*<a href="#overview"
+               onclick="toOverview()"
+               class="project--nav__btn btn_overview btn--hover btn btn-xl mx-1 px-4 text-white font-weight-bold border rounded-0 py-2 shadow-sm2 active">TỔNG QUAN</a>
+            <a href="#location "
+               onclick="toLocation()"
+               class="project--nav__btn btn_location btn btn--hover btn-xl mx-1 px-4 text-white font-weight-bold border rounded-0 py-2 shadow-sm">VỊ TRÍ</a>*@
+            @*<a href="#utilities"
+               onclick="toUtilities()"
+               class="project--nav__btn btn_utilities btn btn--hover btn-xl mx-1 px-4 text-white font-weight-bold border rounded-0 py-2 shadow-sm">TIỆN ÍCH</a>*@
+            @*<a href="#perspective"
+               onclick="toPerspective()"
+               class="project--nav__btn btn_perspective btn btn--hover btn-xl mx-1 px-4 text-white font-weight-bold border rounded-0 py-2 shadow-sm">PHỐI CẢNH</a>*@
+            @*<a href="#contact"
+                id="toContact "
+                onclick="toContact()"
+                class="project--nav__btn btn btn_contact btn--hover btn-xl mx-1 px-4 text-white font-weight-bold border rounded-0 py-2 shadow-sm">LIÊN HỆ</a>*@
+        </div>
+    </div>
+</div>
+
+<div id="my-scrollbar" class="my-container">
+    <!--Content-->
+    <div id="carouselExampleCaptions"
+         class="carousel slide hero"
+         data-bs-ride="false">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="@Model.Image"
+                     class="d-block"
+                     alt="..." />
+                <div class="carousel-caption d-md-block bg-warning">
+                    <h1>@Model.TenDuAn</h1>
+                    <p href="#overview" class="text-white">Xem Thông Tin Dự Án</p>
+                    <a href="#"><i class="bx bx-chevrons-down"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center p-0">
+        <div class="project--header justify-content-start flex-column">
+            <div class="project--nav header-setTop d-flex justify-content-start flex-wrap align-items-center px-md-5"
+                 id="my-header">
+                @*<a href="#overview"
+                   onclick="toOverview()"
+                   id="toOverview"
+                   class="project--nav__btn btn--hover btn btn-xl mx-1 px-4 text-white font-weight-bold border rounded-0 py-2 shadow-sm2 active">TỔNG QUAN</a>
+                <a href="#location "
+                   onclick="toLocation()"
+                   id="toLocation "
+                   class="project--nav__btn btn btn--hover btn-xl mx-1 px-4 text-white font-weight-bold border rounded-0 py-2 shadow-sm">VỊ TRÍ</a>*@
+                @*<a href="#utilities"
+                   onclick="toUtilities()"
+                   id="toUtilities "
+                   class="project--nav__btn btn btn--hover btn-xl mx-1 px-4 text-white font-weight-bold border rounded-0 py-2 shadow-sm">TIỆN ÍCH</a>*@
+                @*<a href="#perspective"
+                   onclick="toPerspective()"
+                   id="toPerspective "
+                   class="project--nav__btn btn btn--hover btn-xl mx-1 px-4 text-white font-weight-bold border rounded-0 py-2 shadow-sm">PHỐI CẢNH</a>*@
+                @*<a href="#contact"
+                    onclick="toContact()"
+                    id="toContact "
+                    class="project--nav__btn btn btn--hover btn-xl mx-1 px-4 text-white font-weight-bold border rounded-0 py-2 shadow-sm">LIÊN HỆ</a>*@
+            </div>
+        </div>
+    </div>
+
+    <div class="utilities" id="utilities" data-aos="fade-down">
+        <div class="utilities-title">@Model.TenDuAn</div>
+        <div class="utilities-box mt-3" data-aos="fade-down">
+            @Html.Raw(Model.TienIch)
+        </div>
+    </div>
+    @*<div class="perspective" id="perspective" data-aos="fade-up">
+        <div class="perspective-title">PHỐI CẢNH</div>
+        <div class="perspective-box">
+            <div class="perspective-img owl-carousel">
+                @if (ViewBag.BoiCanh != null)
+                {
+                    foreach (var item in ViewBag.BoiCanh)
+
+                    {
+                        <div class="item">
+                            <div class="shadow-effect">
+                                <img class="img-circle" src="@item.Image" alt="@item.Title" />
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>*@
+
+    <!--Footer-->
+    @{Html.RenderAction("Footer", "Home"); }
+</div>

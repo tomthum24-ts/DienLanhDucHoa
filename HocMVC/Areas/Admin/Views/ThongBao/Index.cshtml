@@ -1,0 +1,64 @@
+﻿@model List<Model.EF.QuangCao>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section jsfooter{
+    <script src="~/Public/Controller/QuangCaoController.js"></script>
+    <script src="~/Public/dist/js/mustache.min.js"></script>
+}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Danh sách thông báo</h3>
+        @*<div class="form-group">
+            <a href="/Admin/quanly/Create">
+                <button class="btn btn-success btn-lg float-right"
+                        type="submit">
+                    Thêm mới
+                </button>
+            </a>
+        </div>*@
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Tên thông báo</th>
+                    <th>Hình ảnh</th>
+                    <th>Đường dẫn</th>
+                    <th>Trạng thái</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr id="row_@item.Id">
+                            <td>@item.Name</td>
+                            <td><img src="@item.Image" class="img-responsive" style=" width:40px; height:40px;" /></td>
+                            <td>@item.Link</td>
+                            <td><a href="#" class="btn-active" data-id="@item.Id">@Html.Raw(item.Status ? "Kích hoạt" : "Khoá")</a></td>
+                            <td>
+                                <a href="/Admin/ThongBao/Edit/@item.Id">Sửa</a>
+
+                            </td>
+                        </tr>
+                    }
+                }
+
+
+
+            </tbody>
+
+        </table>
+        @*@Html.PagedListPager(Model,Page=>Url.Action("Index",new {Page }))*@
+    </div>
+    <!-- /.card-body -->
+</div>
+
+
+
+

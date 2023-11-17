@@ -1,0 +1,180 @@
+﻿@model IEnumerable<Model.EF.XayDung>
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int soThuTu = 0;
+    var link = "/xay-dung";
+}
+@section OpenGraph {
+    <title>Danh sách dự án</title>
+    <meta property="og:title" content="Danh sách dự án">
+    <meta property="og:image" content="~/Public/Layout/Images/logo.png">
+    <meta property="og:image:secure_url" content="~/Public/Layout/Images/logo.png">
+    <meta property="og:description" content="Tổng hợp các dự án do Hoàng Gia Group Phân phối">
+    <meta property="og:url" content="./xay-dung">
+    <meta property="og:site_name" content="Tổng hợp các dự án do Hoàng Gia Group Phân phối">
+    <meta name="description" content="Tổng hợp các dự án do Hoàng Gia Group Phân phối">
+
+}
+<div class="header-show d-flex justify-content-center p-0">
+    <div class="project--header justify-content-start flex-column">
+    
+    </div>
+</div>
+<div id="my-scrollbar" class="my-container" data-scrollbar>
+    <!--Background-->
+    @if (ViewBag.Slide != null && ViewBag.Slide.Count > 0)
+    {
+        <div class="overviews-background owl-carousel">
+            @foreach (var item in ViewBag.Slide)
+            {
+
+                <div class="item">
+                    <img src="@item.Image" alt="" />
+                </div>
+            }
+        </div>
+
+    }
+    else
+    {
+        <div class="overviews-background owl-carousel">
+            <div class="item">
+                <img src="/Public/Layout/Images/pexels-terry-magallanes-2635038.jpg" alt="" />
+            </div>
+            <div class="item">
+                <img src="/Public/Layout/Images/img1.jpg" alt="" />
+            </div>
+        </div>
+    }
+
+    <!--start-->
+    <div class="container project">
+        <div class="project--header d-flex justify-content-start flex-column">
+            <h2 class="project--header__title mt-2 display-4 text-warning px-md-5">
+                HOÀNG GIA CONSTRUCTION
+            </h2>
+
+        </div>
+        <div class="header-setTop"></div>
+        <div class="project--list">
+
+            @foreach (var item in Model)
+            {
+                if (soThuTu % 2 == 0)
+                {
+                    <div class="row project--item flex-md-row-reverse justify-content-center align-items-center"
+                         data-aos="fade-left">
+                        <div class="col-xl-6 col-md-6 col-sm-12 project--item__img p-0">
+                            <div data-aos="zoom-in"
+                                 class="project--item__image"
+                                 data-aos="zoom-in">
+                                <a href="/cong-trinh/@item.MetaTitle-@item.Id">
+                                    <img class="bg-secondary image"
+                                         src="@item.Image"
+                                         alt="@item.Title" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-md-6 col-sm-12 project--item__sub d-flex align-items-start flex-column justify-content-center pr-md-5">
+                            <h3 class="project--item__title display-4 font-weight-bold" style="font-size:2em">
+                                @item.TenDuAn
+                            </h3>
+                            <p class="project--item__desc" style="font-size:1em">
+                                @item.MoTa
+                            </p>
+                            <a href="/cong-trinh/@item.MetaTitle-@item.Id" class="project--item__btn btn btn--hover">XEM DỰ ÁN</a>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row project--item justify-content-center align-items-center"
+                         data-aos="fade-left">
+                        <div class="col-xl-6 col-md-6 col-sm-12 project--item__img p-0">
+                            <div data-aos="zoom-in"
+                                 class="project--item__image"
+                                 data-aos="zoom-in">
+                                <a href="/cong-trinh/@item.MetaTitle-@item.Id">
+                                    <img class="bg-secondary image"
+                                         src="@item.Image"
+                                         alt="@item.Title" />
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-md-6 col-sm-12 project--item__sub d-flex align-items-start flex-column justify-content-center pr-md-5">
+                            <h3 class="project--item__title display-4 font-weight-bold" style="font-size:2em">
+                                @item.TenDuAn
+                            </h3>
+                            <p class="project--item__desc" style="font-size:1em">
+                                @item.MoTa
+                            </p>
+                            <a href="/cong-trinh/@item.MetaTitle-@item.Id" class="project--item__btn btn btn--hover">XEM DỰ ÁN</a>
+                        </div>
+                    </div>
+                }
+
+                soThuTu++;
+            }
+        </div>
+        @if (ViewBag.Total > 0)
+        {
+            var pageDisplay = (int)ViewBag.MaxPage;
+            int totalPage = (int)ViewBag.TotalPage;
+            int currentPage = ((int)ViewBag.Page);
+
+            // Create numeric links
+            var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+            var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+
+            <nav style="verticle-align: middle; ">
+                <ul class="pagination">
+                    @if (currentPage > ViewBag.First)
+                    {
+                        <li style="margin-right:5px; margin-top:5px"><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i>Trang đầu</a></li>
+                        @*<li>
+                                <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev">Trang trước<i class="fa fa-angle-left"></i></a>
+                            </li>*@
+
+                    }
+                    @for (int i = startPageIndex; i <= endPageIndex; i++)
+                    {
+                        <div class="btn-group" role="group" aria-label="First group">
+                            @if (currentPage == i)
+                            {
+
+                                <a href="@link?page=@i" class="active" title="Trang @i"><button style="margin-right: 5px; color: black" type="button" class="btn btn-secondary mb-4">@i</button> </a>
+
+
+
+                            }
+                            else
+                            {
+                                <a href="@link?page=@i" class="active" title="Trang @i"><button style="margin-right: 5px; color: white" type="button" class="btn btn-secondary mb-4">@i</button> </a>
+                            }
+                        </div>
+                    }
+                    @if (currentPage < totalPage)
+                    {
+                        @*<li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau">Trang sau<i class="fa fa-angle-right"></i></a></li>*@
+                        <li style="margin-right:5px;margin-top:5px"> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối">Trang cuối<i class="fa fa-angle-double-right"></i></a></li>
+                    }
+
+                </ul>
+            </nav>
+
+        }
+        else
+        {
+            <div class="row project--item justify-content-center align-items-center"
+                 data-aos="fade-left">
+                <img class="bg-secondary image" style="max-height:400px; max-width:400px"
+                     src="~/Public/Layout/Images/Nodata.jpg"
+                     alt="" />
+            </div>
+        }
+    </div>
+    @{Html.RenderAction("Footer", "Home"); }
+</div>

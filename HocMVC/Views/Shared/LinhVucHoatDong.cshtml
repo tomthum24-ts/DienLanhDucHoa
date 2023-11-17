@@ -1,0 +1,73 @@
+﻿@model List<Model.EF.LinhVucHoatDong>
+@{
+    var active = Model.Select(x => x.Id).FirstOrDefault();
+    var listActive = Model.Where(x => x.Id == active).ToList();
+    var listNoActive = Model.Where(x => x.Id != active).ToList();
+}
+
+<div class="section">
+    <div class="container">
+        <div class="resort">
+            <div class="resort_title"
+                 data-aos-delay="50"
+                 data-aos="fade-down"
+                 data-aos-duration="700"
+                 data-aos-anchor-placement="top-bottom">
+                Về Chúng Tôi
+            </div>
+            <div class="resort_desc"
+                 data-aos="fade-down"
+                 data-aos-delay="50"
+                 data-aos-duration="700"
+                 data-aos-anchor-placement="top-bottom">
+                Đáp ứng đầy đủ nhu cầu về tư vấn chữa điện lạnh của khách hàng với chất lượng và dịch vụ ngày càng tốt hơn.
+            </div>
+            <div class="resort_lists">
+                @foreach (var item in listActive)
+                {
+                    <div class="resort_item"
+                         data-aos="fade-down"
+                         data-aos-offset="300"
+                         data-aos-delay="400"
+                         data-aos-duration="700"
+                         data-aos-easing="ease-in-out">
+                        <a href="@item.Link">
+                            <div class="resort_item--info">
+                                <img src="@item.Image" alt="@item.Description" />
+                                <div class="info">
+
+                                    <div class="info--title">@item.Name</div>
+                                </div>
+                            </div>
+                        </a>
+                      
+                    </div>
+                }
+                @foreach (var item in listNoActive)
+                {
+                    <div class="resort_item move"
+                         data-aos="fade-down"
+                         data-aos-offset="300"
+                         data-aos-delay="600"
+                         data-aos-duration="700"
+                         data-aos-easing="ease-in-out">
+                        <a href="@item.Link">
+                            <div class="resort_item--info">
+
+                                <img src="@item.Image" alt="@item.Description" />
+                                <div class="info">
+
+                                    <div class="info--title">@item.Name</div>
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

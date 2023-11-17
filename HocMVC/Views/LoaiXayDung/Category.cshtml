@@ -1,0 +1,128 @@
+﻿@model Model.EF.LoaiXayDung
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section OpenGraph {
+    <title>@Model.TenLoaiDuAn</title>
+    <meta property="og:title" content="@Model.TenLoaiDuAn">
+    <meta property="og:image" content="~/@Model.Image">
+    <meta property="og:image:secure_url" content="~/@Model.Image">
+    <meta property="og:description" content="@ViewBag.Description">
+    <meta property="og:url" content="/loai-xay-dung/@Model.TenLoaiDuAn-@Model.Id">
+    <meta property="og:site_name" content="Tổng hợp các dự án do Hoàng Gia Group Phân phối">
+    <meta name="description" content="@ViewBag.Description">
+
+}
+<div class="header-show d-flex justify-content-center p-0">
+    <div class="project--header justify-content-start flex-column">
+        <div class="project--nav d-flex justify-content-start flex-wrap align-items-center px-md-5">
+            
+            @if (ViewBag.XayDung != null || ViewBag.XayDung.Count == 0)
+            {
+                foreach (var item in ViewBag.XayDung)
+                {
+                    if (item.Id == Model.Id)
+                    {
+                        <a href="/loai-xay-dung/@item.MetaTitle-@item.Id"
+                           class="project--nav__btn btn--hover btn btn-xl mr-2 text-white font-weight-bold border rounded-0 shadow-sm active">@item.TenLoaiDuAn</a>
+                    }
+                    else
+                    {
+                        <a href="/loai-xay-dung/@item.MetaTitle-@item.Id"
+                           class="project--nav__btn btn--hover btn btn-xl mr-2 text-white font-weight-bold border rounded-0 shadow-sm">@item.TenLoaiDuAn</a>
+                    }
+
+                }
+
+            }
+        </div>
+    </div>
+</div>
+<!--Background-->
+<div id="my-scrollbar" class="my-container" data-scrollbar>
+    <!--Background-->
+    @if (ViewBag.Slide != null && ViewBag.Slide.Count > 0)
+    {
+        foreach (var item in ViewBag.Slide)
+        {
+            <div class="overviews-background owl-carousel">
+                <div class="item">
+                    <img src="@item.Image" alt="" />
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="overviews-background owl-carousel">
+            <div class="item">
+                <img src="/Public/Layout/Images/pexels-terry-magallanes-2635038.jpg" alt="" />
+            </div>
+            <div class="item">
+                <img src="/Public/Layout/Images/img1.jpg" alt="" />
+            </div>
+        </div>
+    }
+    <!--start-->
+    <div class="details-media mb-5">
+        <div class="project--header d-flex justify-content-start flex-column ml-md-5 px-md-5">
+            <h2 class="project--header__title details-media_title display-4 text-warning">
+                @Model.TenLoaiDuAn
+            </h2>
+            <div class="project--nav details-media_nav d-flex justify-content-start flex-wrap align-items-center"
+                 id="project--nav">
+                @*<a href="#"
+                    class="project--nav__btn btn--hover btn btn-xl mx-1 px-4 text-white font-weight-bold border rounded-0 py-2 shadow-sm2 active">TẤT CẢ</a>*@
+                @if (ViewBag.XayDung != null || ViewBag.XayDung.Count == 0)
+                {
+                    foreach (var item in ViewBag.XayDung)
+                    {
+                        if (item.Id == Model.Id)
+                        {
+                            <a href="/loai-xay-dung/@item.MetaTitle-@item.Id"
+                               class="project--nav__btn btn btn--hover btn-xl mx-1 px-4 text-white font-weight-bold border rounded-0 py-2 shadow-sm active">@item.TenLoaiDuAn</a>
+                        }
+                        else
+                        {
+                            <a href="/loai-xay-dung/@item.MetaTitle-@item.Id"
+                               class="project--nav__btn btn btn--hover btn-xl mx-1 px-4 text-white font-weight-bold border rounded-0 py-2 shadow-sm">@item.TenLoaiDuAn</a>
+                        }
+
+                    }
+
+                }
+            </div>
+        </div>
+    </div>
+    <div class="header-setTop"></div>
+    <div class="details shadow-lg mb-5"
+         data-aos="fade-up"
+         data-aos-duration="600">
+        <div class="details--content">
+            <div class="details--title">
+                <div class="row m-0 flex-row flex-nowrap" data-aos="fade-up">
+                    <div class="col-sm-11 col-md-11">
+                        <h4>@Model.Mota</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details--img" data-aos="fade-up">
+                <img src="@Model.Image" alt="" /
+            </div>
+            @Html.Raw(@Model.NoiDung)
+        </div>
+
+        <div class="details--choices d-flex bg-warning justify-content-center align-items-center"
+             data-aos="fade-up">
+
+            <div class="print" onclick="window.print();">
+                <i class="bx bx-printer"></i> <span>IN TRANG</span>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+@{Html.RenderAction("Footer", "Home"); }

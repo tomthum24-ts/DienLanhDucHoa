@@ -1,0 +1,142 @@
+﻿@model Model.EF.Footer
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section jsFooter{
+    <script>
+        $('#btnSelectImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#txtImage').val(url);
+            };
+            finder.popup();
+        })
+        $('#btnSelectImageLogo').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#txtImageLogo').val(url);
+            };
+            finder.popup();
+        })
+        var editor = CKEDITOR.replace('txtContent', {
+            customConfig: '/Public/ckeditor/config.js',
+        });
+    </script>
+}
+@using (Html.BeginForm("Edit", "Footer", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class=" register-form">
+        <div class="form">
+            <div class="note">
+                <p>Cập nhật Footer</p>
+            </div>
+            <section>
+                <div class="row" style="border-bottom:solid 3px #dadada">
+                    <div class="col-8">
+
+                    </div>
+                    <div class="col-sm-4" style="margin-top:10px">
+                        @*<button type="submit" class="btn btn-default" style="margin-bottom:10px;color:white; float:right;margin-right:10px">@Html.ActionLink("Trở lại", "Index")</button>*@
+                        <input type="submit" value="Lưu" class="btn btn-success" style="margin-bottom:10px;margin-right:10px; float:right" />
+                    </div>
+                </div>
+            </section>
+            <section class="content">
+                <div class="row">
+
+                    <div class="col-7" style="margin-left:10px">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            <label>Tên công ty</label>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Hotline</label>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Hotline, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Hotline, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Website</label>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Địa chỉ</label>
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(model => model.DiaChi, htmlAttributes: new { @class = "form-control", @rows = 5, @cols = 30 })
+                                @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Banner</label>
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control", @id = "txtImage" }, id = "txtImage" })
+                                <a id="btnSelectImage" href="#">Chọn ảnh</a>
+                                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label>Logo</label>
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Logo, new { htmlAttributes = new { @class = "form-control", @id = "txtImageLogo" }, id = "txtImageLogo" })
+                                    <a id="btnSelectImageLogo" href="#">Chọn ảnh</a>
+                                    @Html.ValidationMessageFor(model => model.Logo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <div class="form-horizontal">
+
+            </div>
+        </div>
+    </div>
+}
+<style>
+    .note {
+        text-align: center;
+        height: 80px;
+        background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+        color: #fff;
+        font-weight: bold;
+        line-height: 80px;
+    }
+
+    .form-content {
+        padding: 5%;
+        border: 1px solid #ced4da;
+        margin-bottom: 2%;
+    }
+
+    .form-control {
+        border-radius: 1.5rem;
+    }
+
+    .btnSubmit {
+        border: none;
+        border-radius: 1.5rem;
+        padding: 1%;
+        width: 20%;
+        cursor: pointer;
+        background: #0062cc;
+        color: #fff;
+    }
+</style>
+

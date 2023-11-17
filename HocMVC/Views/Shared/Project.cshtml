@@ -1,0 +1,47 @@
+﻿@using Model.Enum;
+@model List<Model.EF.DuAn>
+@{
+    /**/
+    var link = LinkConstants.DichVu;
+}
+
+<!--ABOUT US-->
+<div class="section">
+    <div class="container service-box">
+        <h3 class="text-center service-box-title"
+            data-aos="fade-up"
+            data-aos-duration="700"
+            data-aos-delay="50"
+            data-aos-anchor-placement="top-bottom">
+            DỊCH VỤ ĐIỆN LẠNH TẠI TP. HỒ CHÍ MINH
+        </h3>
+        <p class="text-left lead service-box-desc"
+           data-aos="fade-up"
+           data-aos-delay="50"
+           data-aos-duration="700">
+            Đáp ứng đầy đủ nhu cầu về tư vấn chữa điện lạnh của khách hàng với chất lượng và dịch vụ ngày càng tốt hơn.
+        </p>
+        <div class="service owl-carousel owl-theme">
+            @foreach (var item in Model)
+            {
+                <div class="item"
+                     data-aos="fade-right"
+                     data-aos-offset="200"
+                     data-aos-delay="100"
+                     data-aos-duration="700"
+                     data-aos-easing="ease-in-out">
+                    <img src="@item.Image" alt="" class="item__img" />
+                    <div class="item__overlay item__overlay-color">
+                        <a class="item__overlay-title">@item.TenDuAn</a>
+                        <div class="item__overlay-desc">
+                            @Html.Raw(item.MoTa);
+                        </div>
+                        <a href="@link/@item.MetaTitle-@item.Id" class="item__overlay-btn">
+                            Khám Phá <i class="bx bx-chevrons-right"></i>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

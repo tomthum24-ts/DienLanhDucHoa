@@ -1,0 +1,194 @@
+﻿@model Model.EF.XayDung
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@section jsFooter{
+    <script>
+        $('#btnSelectImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#txtImage').val(url);
+            };
+            finder.popup();
+        })
+        $('#btnSelectImageViTri').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#txtImageViTri').val(url);
+            };
+            finder.popup();
+        })
+        $('#btnSelectImageTongQuan').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#txtImageTongQuan').val(url);
+            };
+            finder.popup();
+        })
+        var tongQuan = CKEDITOR.replace('txtTongQuan', {
+            customConfig: '/Public/ckeditor/config.js',
+        });
+        var viTri = CKEDITOR.replace('txtViTri', {
+            customConfig: '/Public/ckeditor/config.js',
+        });
+        var tienIch = CKEDITOR.replace('txtTienIch', {
+            customConfig: '/Public/ckeditor/config.js',
+        });
+
+        function readURL(input) {
+            if (input.files && input.files.length > 0) {
+                for (var i = 0; i < input.files.length; i++) {
+                    var reader = new FileReader();
+                    $('#imgViewer').empty();
+                    reader.onload = function (e) {
+                        $('#imgViewer').attr('src', e.target.result);
+                        $('#imgViewer').append($('<img>', { src: e.target.result, width: '200px', height: '200px' }));
+                    }
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        }
+        $("#imageUploader").change(function () {
+            readURL(this);
+        });
+
+    </script>
+}
+
+@using (Html.BeginForm("Edit", "XayDung", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class=" register-form">
+        <div class="form">
+            <div class="note">
+                <p>Cập nhật</p>
+
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="row" style="border-bottom:solid 3px #dadada">
+            <div class="col-7" style="margin-left:10px">
+
+            </div>
+            <div class="col-sm-4" style="margin-top:10px">
+                <button type="submit" class="btn btn-default" style="margin-bottom:10px;color:white; float:right;margin-right:10px">@Html.ActionLink("Trở lại", "Index")</button>
+                <input type="submit" value="Lưu" class="btn btn-success" style="margin-bottom:10px;margin-right:10px; float:right" />
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="row">
+
+            <div class="col-sm-7" style="margin-left:10px">
+                <div class="form-group">
+                    <label>Tên dự án</label>
+                    @Html.ValidationMessageFor(model => model.TenDuAn, "", new { @class = "text-danger" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.TenDuAn, new { htmlAttributes = new { @class = "form-control" } })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Đường dẫn</label>
+                    @Html.ValidationMessageFor(model => model.MetaTitle, "", new { @class = "text-danger" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.MetaTitle, new { htmlAttributes = new { @class = "form-control" } })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Mô tả</label>
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Mô tả</label>
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.TienIch, new { htmlAttributes = new { @class = "form-control" }, @id = "txtTienIch" })
+                        @Html.ValidationMessageFor(model => model.TienIch, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Hình ảnh</label>
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(model => model.Image, new { @class = "form-control", htmlAttributes = new { @id = "txtImage" }, id = "txtImage" })
+                        <a id="btnSelectImage" href="#">Chọn ảnh</a>
+                        @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                        @*<img src="cinqueterre.jpg" id = "txtImage" class="rounded" alt="Cinque Terre" width="100" height="100">*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Hiển thị</label>
+                    <div class="col-md-12">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Status)
+                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<div>
+
+</div>
+<style>
+    .note {
+        text-align: center;
+        height: 80px;
+        background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+        color: #fff;
+        font-weight: bold;
+        line-height: 80px;
+    }
+
+    .form-content {
+        padding: 5%;
+        border: 1px solid #ced4da;
+        margin-bottom: 2%;
+    }
+
+    .form-control {
+        border-radius: 1.5rem;
+    }
+
+    .btnSubmit {
+        border: none;
+        border-radius: 1.5rem;
+        padding: 1%;
+        width: 20%;
+        cursor: pointer;
+        background: #0062cc;
+        color: #fff;
+    }
+</style>

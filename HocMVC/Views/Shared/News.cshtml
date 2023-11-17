@@ -1,0 +1,79 @@
+﻿@using Model.Enum;
+@model List<Model.EF.Contents>
+@{
+    var listActive = Model.Select(x => x.ID).FirstOrDefault();
+    var listNewsMain = Model.Where(x => x.ID == listActive).ToList();
+    var listNews = Model.Where(x => x.ID != listActive).ToList();
+    var link = LinkConstants.TinTuc;
+}
+
+
+
+<div class="section bg-warning">
+    <div class="container news">
+        <div class="news--center text-left">
+            <div class="news--title display-2 font-weight-bold"
+                 data-aos="fade-down"
+                 data-aos-offset="300"
+                 data-aos-delay="100"
+                 data-aos-duration="700"
+                 data-aos-easing="ease-in-out">
+                TIN TỨC KINH NGHIỆM
+            </div>
+            <div class="news--content row mx-0">
+                @foreach (var item in listNewsMain)
+                {
+                    <a href="@link/@item.MetaTitle-@item.ID"
+                       class="col-xl-6 col-md-6 col-sm-12"
+                       data-aos="fade-right"
+                       data-aos-offset="300"
+                       data-aos-delay="50"
+                       data-aos-duration="700"
+                       data-aos-easing="ease-in-out">
+                        <div class="news--content__main mb-2">
+                            <img src="@item.Image"
+                                 alt=""
+                                 class="thumb" />
+                        </div>
+                        <div class="news--content__date date">
+                            @item.CreatedDate.ToString("dd") <span>@item.CreatedDate.ToString("MM")-@item.CreatedDate.ToString("yyyy")</span>
+                        </div>
+                        <h3 class="news--content__title">@item.Description</h3>
+                        <p class="news--content__link">Xem Chi Tiết</p>
+                    </a>
+                }
+
+                <div class="col-xl-6 col-md-6 col-sm-12">
+                    <div class="row">
+                        @foreach (var item in listNews)
+                        {
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-lg-6"
+                                 data-aos="fade-down"
+                                 data-aos-offset="500"
+                                 data-aos-delay="50"
+                                 data-aos-duration="700"
+                                 data-aos-easing="ease-in-out">
+                                <a href="@link/@item.MetaTitle-@item.ID" class="news--content__more">
+                                    <div class="news--content__img mb-2">
+                                        <img src="@item.Image" alt="" class="thumb" />
+                                    </div>
+                                    <div class="news--content__date date">
+                                        @item.CreatedDate.ToString("dd") <span>@item.CreatedDate.ToString("MM")-@item.CreatedDate.ToString("yyyy")</span>
+                                    </div>
+                                    <h3 class="news--content__title">
+                                        @item.Description
+                                    </h3>
+                                    <p class="news--content__link">Xem Chi Tiết</p>
+                                </a>
+                            </div>
+                        }
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Count number-->

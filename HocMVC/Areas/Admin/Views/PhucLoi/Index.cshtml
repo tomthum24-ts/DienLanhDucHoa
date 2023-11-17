@@ -1,0 +1,81 @@
+﻿@model List<Model.EF.PhucLoi>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+@section jsfooter{
+    <script src="~/Public/Controller/PhucLoiController.js"></script>
+    <script src="~/Public/dist/js/mustache.min.js"></script>
+}
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Phúc lợi</h3>
+        <div class="form-group">
+            <a href="/Admin/PhucLoi/Create">
+                <button class="btn btn-success btn-lg float-right"
+                        type="submit">
+                    Thêm mới
+                </button>
+            </a>
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Phân loại </th>
+                    <th>Tên</th>
+                    <th>Mô tả</th>
+                    <th>Hình ảnh</th>
+                    <th>Ngày đăng</th>
+                    <th>Trạng thái</th>
+
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr id="row_@item.Id">
+                        <td>@Html.Raw(item.IsPhucLoi ?  "Phúc lợi":"Nội dung" )</td>
+                        <td>@item.Name</td>
+                        <td>@item.NoiDung </td>
+                        <td><img src="@item.Image" class="img-responsive" style=" width:60px; height:40px;" /></td>
+                        <td>@item.CreatedDate.ToString("dd/MM/yyyy") </td>
+
+                        <td><a href="#" class="btn-active" data-id="@item.Id">@Html.Raw(item.Status ? "Kích hoạt" : "Khoá")</a></td>
+
+                        <td>
+                            <a href="/Admin/PhucLoi/Edit/@item.Id">Sửa</a>
+                            |
+                            @Ajax.ActionLink("Xoá", "Delete", new { @id = item.Id }, new AjaxOptions
+                       {
+                           Confirm = "Bạn có muốn xoá bản ghi này?",
+                           OnComplete = "$('#row_" + @item.Id + "').remove()",
+                           HttpMethod = "Delete"
+                       })
+                        </td>
+                    </tr>
+                }
+
+
+
+            </tbody>
+
+        </table>
+        @*@Html.PagedListPager(Model,Page=>Url.Action("Index",new {Page }))*@
+    </div>
+    <!-- /.card-body -->
+</div>
+
+
+
+
+
+
+
+
